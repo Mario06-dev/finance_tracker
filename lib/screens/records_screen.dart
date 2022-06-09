@@ -32,7 +32,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
             return Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.only(bottom: 20),
+                  margin: const EdgeInsets.only(top: 30, bottom: 25),
                   child: Row(
                     children: [
                       Container(

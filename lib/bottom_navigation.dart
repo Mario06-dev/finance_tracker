@@ -1,5 +1,6 @@
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
+import 'package:finance_tracker/screens/add_trans_screen.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/records_screen.dart';
 import 'package:finance_tracker/screens/settings_screen.dart';
@@ -70,7 +71,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => AddTransScreen(0)));
+        },
         backgroundColor: primaryColor,
         child: Icon(Icons.add),
       ),
