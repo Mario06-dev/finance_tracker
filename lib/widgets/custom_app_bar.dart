@@ -6,7 +6,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List actions = [];
 
-  CustomAppBar({Key? key, required this.title}) : super(key: key);
+  CustomAppBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(60);
@@ -14,6 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       elevation: 0,
       backgroundColor: bgColor,
       title: Text(
@@ -21,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.prompt(
           color: Colors.black,
           fontWeight: FontWeight.w500,
+          fontSize: 18,
         ),
       ),
     );

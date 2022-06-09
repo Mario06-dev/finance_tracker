@@ -1,6 +1,7 @@
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
+import 'package:finance_tracker/screens/records_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +62,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               controller: pageController,
               children: const [
                 DashboardScreen(),
-                Text('favoriter'),
+                RecordsScreen(),
                 Text('settings'),
                 Text('rererer'),
               ],
