@@ -1,10 +1,13 @@
 import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/signup_screen.dart';
 import 'package:finance_tracker/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../resources/auth_methods.dart';
+import '../utils/utils.dart';
 import '../widgets/small_action_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,8 +18,36 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+
+    if (res == 'success') {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+      );
+    } else {
+      showSnackBar(res, context);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +121,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(width: 30.w),
-                    const SmallActionButton(),
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : GestureDetector(
+                            onTap: loginUser,
+                            child: const SmallActionButton(),
+                          ),
                   ],
                 ),
                 SizedBox(height: 30.h),
-                Text('Forgot password?'),
+                const Text('Forgot password?'),
               ],
             ),
           ),

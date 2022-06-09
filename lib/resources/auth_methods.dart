@@ -10,6 +10,35 @@ class AuthMethods {
   // Instance of FirebaseFirestore class
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future<UserModel> getUserDetails() async {
+    // User from FirebaseAuth (NOT CUSTOM MODEL USER)
+    User currentUser = _auth.currentUser!;
+
+    DocumentSnapshot snap =
+        await _firestore.collection('users').doc(currentUser.uid).get();
+
+    return UserModel.fromSnap(snap);
+  }
+
+  // Logging in user
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String res = 'Some error occured';
+
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = 'success';
+      } else {
+        res = 'Please enter all the fields';
+      }
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
   Future<String> signUpUser({
     required String email,
     required String password,
