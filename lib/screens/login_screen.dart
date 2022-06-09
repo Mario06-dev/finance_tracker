@@ -1,3 +1,4 @@
+import 'package:finance_tracker/bottom_navigation.dart';
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/signup_screen.dart';
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (res == 'success') {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        MaterialPageRoute(builder: (context) => const BottomNavigation()),
       );
     } else {
       showSnackBar(res, context);

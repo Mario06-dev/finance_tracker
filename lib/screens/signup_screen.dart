@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../bottom_navigation.dart';
 import '../resources/auth_methods.dart';
 import '../utils/utils.dart';
 import '../widgets/small_action_button.dart';
@@ -50,7 +51,7 @@ class _SignupScreenState extends State<SignupScreen> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const DashboardScreen(),
+          builder: (context) => const BottomNavigation(),
         ),
       );
     } else {
