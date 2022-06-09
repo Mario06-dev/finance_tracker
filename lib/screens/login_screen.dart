@@ -15,6 +15,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                const TextFieldInput(
+                TextFieldInput(
+                  controller: _emailController,
                   hintText: 'name@example.com',
                   labelText: 'Email',
                   textInputType: TextInputType.emailAddress,
@@ -76,8 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 25.h),
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: TextFieldInput(
+                        controller: _passwordController,
                         hintText: '********',
                         labelText: 'Password',
                         textInputType: TextInputType.text,

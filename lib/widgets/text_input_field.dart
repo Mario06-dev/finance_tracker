@@ -6,6 +6,7 @@ class TextFieldInput extends StatelessWidget {
   final String hintText;
   final String labelText;
   final TextInputType textInputType;
+  final TextEditingController controller;
 
   const TextFieldInput({
     Key? key,
@@ -13,11 +14,13 @@ class TextFieldInput extends StatelessWidget {
     required this.hintText,
     required this.labelText,
     required this.textInputType,
+    required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       keyboardType: textInputType,
       obscureText: isPass ? true : false,
       decoration: InputDecoration(
