@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData.light().copyWith(
             scaffoldBackgroundColor: Colors.white,
-            textTheme: GoogleFonts.promptTextTheme(),
+            textTheme: GoogleFonts.rubikTextTheme(),
           ),
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),

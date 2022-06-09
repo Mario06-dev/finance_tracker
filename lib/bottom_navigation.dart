@@ -2,6 +2,7 @@ import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/records_screen.dart';
+import 'package:finance_tracker/screens/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,19 +65,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 DashboardScreen(),
                 RecordsScreen(),
                 Text('settings'),
-                Text('rererer'),
+                SettingsScreen(),
               ],
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add),
         backgroundColor: primaryColor,
+        child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: SizedBox(
-          height: 75,
+          height: 60,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,7 +86,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 iconSize: 30.0,
                 padding: const EdgeInsets.only(left: 28.0),
                 icon: Icon(
-                  _page == 0 ? CupertinoIcons.house_fill : CupertinoIcons.house,
+                  _page == 0
+                      ? CupertinoIcons.square_grid_2x2_fill
+                      : CupertinoIcons.square_grid_2x2,
                   size: 25,
                   color: _page == 0 ? primaryColor : Colors.grey[400],
                 ),

@@ -64,6 +64,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -93,17 +95,22 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 60),
                 Center(
-                  child: SvgPicture.asset(
-                    'assets/images/auth_img_2.svg',
-                    //width: MediaQuery.of(context).size.width * 0.5,
-                    width: 120.w,
-                    height: 120.h,
+                  child: AnimatedContainer(
+                    width: _isKeyboardOpen ? 60.w : 120.w,
+                    height: _isKeyboardOpen ? 60.h : 120.h,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.fastOutSlowIn,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/images/image.png'))),
                   ),
                 ),
                 SizedBox(height: 60.h),
