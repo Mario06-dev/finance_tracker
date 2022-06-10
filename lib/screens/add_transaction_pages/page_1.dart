@@ -1,4 +1,3 @@
-import 'package:finance_tracker/screens/add_trans_screen.dart';
 import 'package:flutter/material.dart';
 
 class Page1 extends StatelessWidget {
