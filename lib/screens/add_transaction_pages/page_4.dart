@@ -2,14 +2,14 @@ import 'package:finance_tracker/widgets/small_action_button.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/text_input_field.dart';
 
-class Page2 extends StatefulWidget {
-  Page2({Key? key}) : super(key: key);
+class Page4 extends StatefulWidget {
+  Page4({Key? key}) : super(key: key);
 
   @override
-  State<Page2> createState() => _Page2State();
+  State<Page4> createState() => _Page4State();
 }
 
-class _Page2State extends State<Page2> {
+class _Page4State extends State<Page4> {
   bool isExpense = true;
   // TEMP value
   TextEditingController _amountController = TextEditingController();
@@ -27,12 +27,12 @@ class _Page2State extends State<Page2> {
         Expanded(
           child: TextFieldInput(
             controller: _amountController,
-            hintText: 'Enter amount...',
-            labelText: 'Amount',
+            hintText: 'Enter description',
+            labelText: 'Description',
             textInputType: TextInputType.number,
           ),
         ),
-        const SizedBox(width: 100),
+        const SizedBox(width: 60),
         GestureDetector(
           child: SmallActionButton(),
         ),

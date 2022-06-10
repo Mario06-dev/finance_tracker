@@ -3,14 +3,14 @@ import 'package:finance_tracker/widgets/small_action_button.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/text_input_field.dart';
 
-class Page3 extends StatefulWidget {
-  Page3({Key? key}) : super(key: key);
+class Page5 extends StatefulWidget {
+  Page5({Key? key}) : super(key: key);
 
   @override
-  State<Page3> createState() => _Page3State();
+  State<Page5> createState() => _Page5State();
 }
 
-class _Page3State extends State<Page3> {
+class _Page5State extends State<Page5> {
   bool isExpense = true;
   // TEMP value
   TextEditingController _amountController = TextEditingController();
@@ -33,15 +33,16 @@ class _Page3State extends State<Page3> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Icon(
-            Icons.category,
+            Icons.calendar_month,
             color: Colors.white,
           ),
           SizedBox(height: 10),
           Text(
-            'Click to choose category',
+            'Today?',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
+              //letterSpacing: 1.5,
             ),
           ),
         ],
