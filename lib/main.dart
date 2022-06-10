@@ -1,4 +1,5 @@
 import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/providers/add_trans_provider.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/login_screen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider(create: (_) => AddTransProvider()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

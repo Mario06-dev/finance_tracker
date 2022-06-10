@@ -1,9 +1,14 @@
+import 'package:finance_tracker/utils/utils.dart';
 import 'package:finance_tracker/widgets/small_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/add_trans_provider.dart';
 import '../../widgets/text_input_field.dart';
 
 class Page2 extends StatefulWidget {
-  Page2({Key? key}) : super(key: key);
+  final PageController pageController;
+
+  Page2({Key? key, required this.pageController}) : super(key: key);
 
   @override
   State<Page2> createState() => _Page2State();
@@ -34,7 +39,22 @@ class _Page2State extends State<Page2> {
         ),
         const SizedBox(width: 100),
         GestureDetector(
-          child: SmallActionButton(),
+          child: GestureDetector(
+            onTap: () {
+              if (_amountController.text.isNotEmpty) {
+                Provider.of<AddTransProvider>(context, listen: false)
+                    .setAmount(_amountController.text);
+                widget.pageController.animateToPage(
+                  2,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
+                );
+              } else {
+                showSnackBar('Please enter amount', context);
+              }
+            },
+            child: const SmallActionButton(),
+          ),
         ),
       ],
     );

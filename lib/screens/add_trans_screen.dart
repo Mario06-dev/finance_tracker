@@ -1,8 +1,12 @@
 import 'package:finance_tracker/screens/add_transaction_pages/page_5.dart';
+import 'package:finance_tracker/screens/add_transaction_pages/page_6.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../colors.dart';
+import '../providers/add_trans_provider.dart';
 import 'add_transaction_pages/page_1.dart';
 import 'add_transaction_pages/page_2.dart';
 import 'add_transaction_pages/page_3.dart';
@@ -22,7 +26,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
   late PageController pageController;
   final TextEditingController _amountController = TextEditingController();
   //int _page = 0;
-  bool isExpense = true;
+  //bool isExpense = true;
 
   @override
   void initState() {
@@ -45,6 +49,13 @@ class _AddTransScreenState extends State<AddTransScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _provider = Provider.of<AddTransProvider>(context);
+
+    bool isExpense = _provider.getisExpense;
+    double amount = _provider.getAmount;
+    String description = _provider.getDescription;
+    DateTime date = _provider.getDate;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -82,24 +93,24 @@ class _AddTransScreenState extends State<AddTransScreen> {
                     leftTitle: 'Transaction type',
                     leftValue: isExpense ? 'Expense' : 'Income',
                     rightTitle: 'Amount',
-                    rightValue: '40.67 kn',
+                    rightValue: '${amount.toStringAsFixed(2)} kn',
                     icon: CupertinoIcons.arrowtriangle_down_fill,
                     isOptionOne: true,
                   ),
                   const SizedBox(height: 30),
-                  const CustomItem(
+                  CustomItem(
                     leftTitle: 'Category',
-                    leftValue: 'Life & Entertainment',
+                    leftValue: '-',
                     rightTitle: 'Date',
-                    rightValue: '20 Jun 2022',
+                    rightValue: DateFormat.MMMd().format(date),
                     icon: Icons.category,
                     isOptionOne: false,
                   ),
                   const SizedBox(height: 30),
-                  const CustomItem(
+                  CustomItem(
                     isDoubleContent: false,
                     leftTitle: 'Transaction description',
-                    leftValue: 'Interspar',
+                    leftValue: description,
                     icon: Icons.description,
                     isOptionOne: false,
                     isDescription: true,
@@ -132,10 +143,17 @@ class _AddTransScreenState extends State<AddTransScreen> {
                         Page1(
                           pageController: pageController,
                         ),
-                        Page2(),
+                        Page2(
+                          pageController: pageController,
+                        ),
                         Page3(),
-                        Page4(),
-                        Page5(),
+                        Page5(
+                          pageController: pageController,
+                        ),
+                        Page4(
+                          pageController: pageController,
+                        ),
+                        Page6(),
                       ],
                     ),
                   ),
@@ -264,14 +282,16 @@ class ProgressBar extends StatelessWidget {
         ),
         FractionallySizedBox(
           widthFactor: value == 0
-              ? 0.2
+              ? 0.167
               : value == 1
-                  ? 0.4
+                  ? 0.333
                   : value == 2
-                      ? 0.6
+                      ? 0.5
                       : value == 3
-                          ? 0.8
-                          : 1,
+                          ? 0.667
+                          : value == 4
+                              ? 0.833
+                              : 1,
           child: Container(
             color: primaryColor,
             height: 2,
@@ -336,6 +356,15 @@ class DotsIndicator extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: selectedIndex == 4 ? primaryColor : Colors.grey.shade400,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Container(
+          height: 10,
+          width: 10,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: selectedIndex == 5 ? primaryColor : Colors.grey.shade400,
           ),
         ),
       ],
