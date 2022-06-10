@@ -22,7 +22,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
   late PageController pageController;
   final TextEditingController _amountController = TextEditingController();
   //int _page = 0;
-  //bool isExpense = true;
+  bool isExpense = true;
 
   @override
   void initState() {
@@ -78,9 +78,9 @@ class _AddTransScreenState extends State<AddTransScreen> {
               const SizedBox(height: 25),
               Column(
                 children: [
-                  const CustomItem(
+                  CustomItem(
                     leftTitle: 'Transaction type',
-                    leftValue: 'Expense',
+                    leftValue: isExpense ? 'Expense' : 'Income',
                     rightTitle: 'Amount',
                     rightValue: '40.67 kn',
                     icon: CupertinoIcons.arrowtriangle_down_fill,
@@ -106,8 +106,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
                   ),
                   //Spacer(),
                   const SizedBox(height: 40),
-                  const Text(
-                      'Please follow the instructions down bellow (use Rrovider)'),
+                  const Text('Please follow the instructions down bellow'),
                   const SizedBox(height: 20),
                   Container(
                     height: 90,
