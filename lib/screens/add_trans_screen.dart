@@ -90,35 +90,78 @@ class _AddTransScreenState extends State<AddTransScreen> {
               const SizedBox(height: 25),
               Column(
                 children: [
-                  CustomItem(
-                    leftTitle: 'Transaction type',
-                    leftValue: isExpense ? 'Expense' : 'Income',
-                    rightTitle: 'Amount',
-                    rightValue: '${amount.toStringAsFixed(2)} kn',
-                    icon: CupertinoIcons.arrowtriangle_down_fill,
-                    isOptionOne: true,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        enableFeedback: false,
+                        onTap: () {
+                          pageController.jumpToPage(0);
+                        },
+                        child: AddValueFieldLeft(
+                          isExpenseField: true,
+                          icon: isExpense
+                              ? CupertinoIcons.arrowtriangle_down_fill
+                              : CupertinoIcons.arrowtriangle_up_fill,
+                          title: 'Transaction type',
+                          value: isExpense ? 'Expense' : 'Income',
+                        ),
+                      ),
+                      InkWell(
+                        enableFeedback: false,
+                        onTap: () {
+                          pageController.jumpToPage(1);
+                        },
+                        child: AddValueFieldRight(
+                          title: 'Amount',
+                          value: '${amount.toStringAsFixed(2)} kn',
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 30),
-                  CustomItem(
-                    leftTitle: 'Category',
-                    leftValue: '-',
-                    rightTitle: 'Date',
-                    rightValue: date.day == DateTime.now().day
-                        ? 'Today'
-                        : date.day == DateTime.now().day - 1
-                            ? 'Yesterday'
-                            : DateFormat.MMMd().format(date),
-                    icon: Icons.category,
-                    isOptionOne: false,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        enableFeedback: false,
+                        onTap: () {
+                          pageController.jumpToPage(2);
+                        },
+                        child: const AddValueFieldLeft(
+                          icon: Icons.category,
+                          isAvatar: true,
+                          title: 'Category',
+                          value: '-',
+                        ),
+                      ),
+                      InkWell(
+                        enableFeedback: false,
+                        onTap: () {
+                          pageController.jumpToPage(3);
+                        },
+                        child: AddValueFieldRight(
+                          title: 'Date',
+                          value: date.day == DateTime.now().day
+                              ? 'Today'
+                              : date.day == DateTime.now().day - 1
+                                  ? 'Yesterday'
+                                  : DateFormat.MMMd().format(date),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 30),
-                  CustomItem(
-                    isDoubleContent: false,
-                    leftTitle: 'Transaction description',
-                    leftValue: description,
-                    icon: Icons.description,
-                    isOptionOne: false,
-                    isDescription: true,
+                  InkWell(
+                    enableFeedback: false,
+                    onTap: () {
+                      pageController.jumpToPage(4);
+                    },
+                    child: AddValueFieldLeft(
+                      icon: Icons.description,
+                      title: 'Description',
+                      value: description,
+                    ),
                   ),
                   //Spacer(),
                   const SizedBox(height: 40),
@@ -145,19 +188,11 @@ class _AddTransScreenState extends State<AddTransScreen> {
                       controller: pageController,
                       onPageChanged: onPageChanged,
                       children: [
-                        Page1(
-                          pageController: pageController,
-                        ),
-                        Page2(
-                          pageController: pageController,
-                        ),
+                        Page1(pageController: pageController),
+                        Page2(pageController: pageController),
                         Page3(),
-                        Page5(
-                          pageController: pageController,
-                        ),
-                        Page4(
-                          pageController: pageController,
-                        ),
+                        Page5(pageController: pageController),
+                        Page4(pageController: pageController),
                         Page6(),
                       ],
                     ),
@@ -174,104 +209,98 @@ class _AddTransScreenState extends State<AddTransScreen> {
   }
 }
 
-class CustomItem extends StatelessWidget {
-  final bool isDoubleContent;
-  final String leftTitle, rightTitle;
-  final String leftValue, rightValue;
-  final IconData icon;
-  final bool isOptionOne;
-  final bool isDescription;
+class AddValueFieldRight extends StatelessWidget {
+  final String title;
+  final String value;
 
-  const CustomItem({
+  const AddValueFieldRight({Key? key, required this.title, required this.value})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            color: textColor,
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          value,
+          style: const TextStyle(
+            color: blackTextColor,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class AddValueFieldLeft extends StatelessWidget {
+  final bool isAvatar;
+  final String title;
+  final String value;
+  final IconData icon;
+  final bool isExpenseField;
+
+  const AddValueFieldLeft({
     Key? key,
-    this.isDoubleContent = true,
-    required this.leftTitle,
-    required this.leftValue,
+    this.isAvatar = false,
+    required this.title,
+    required this.value,
     required this.icon,
-    required this.isOptionOne,
-    this.isDescription = false,
-    this.rightTitle = '',
-    this.rightValue = '',
+    this.isExpenseField = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        pageController.jumpToPage(3);
-      },
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 16,
-            //backgroundColor: isOptionOne ? Colors.redAccent : primaryColor,
-            backgroundColor:
-                isOptionOne || isDescription ? Colors.white : primaryColor,
-            child: Icon(
-              //isExpense ? Icons.arrow_downward : Icons.arrow_upward,
-              isOptionOne
-                  ? leftValue == 'Expense'
-                      ? CupertinoIcons.arrowtriangle_down_fill
-                      : CupertinoIcons.arrowtriangle_up_fill
-                  : icon,
-              //color: Colors.white,
-              //color: isExpense ? Colors.redAccent : primaryColor,
-              color: isOptionOne || isDescription
-                  ? leftValue == 'Expense'
-                      ? Colors.red
-                      : primaryColor
-                  : Colors.white,
-              size: 18,
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 16,
+          backgroundColor: isAvatar ? primaryColor : Colors.white,
+          child: Icon(
+            icon,
+            color: isExpenseField
+                ? value == 'Expense'
+                    ? Colors.red
+                    : Colors.greenAccent
+                : isAvatar
+                    ? Colors.white
+                    : primaryColor,
+            //color: isAvatar ? Colors.white : primaryColor,
+            size: 18,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: textColor,
+                fontSize: 12,
+              ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                leftTitle,
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 12,
-                ),
+            const SizedBox(height: 5),
+            Text(
+              value,
+              style: const TextStyle(
+                color: blackTextColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 5),
-              Text(
-                leftValue,
-                style: const TextStyle(
-                  color: blackTextColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          isDoubleContent
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      rightTitle,
-                      style: const TextStyle(
-                        color: textColor,
-                        fontSize: 12,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      rightValue,
-                      style: const TextStyle(
-                        color: blackTextColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                )
-              : Container(),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
