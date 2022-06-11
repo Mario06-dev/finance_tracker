@@ -1,0 +1,39 @@
+/* 
+    	Category Model
+ */
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+class Category {
+  final String categoryId;
+  final String title;
+  final Color color;
+  final IconData icon;
+
+  const Category({
+    required this.categoryId,
+    required this.title,
+    required this.color,
+    required this.icon,
+  });
+
+  // Converting everything we get form input to object file
+  Map<String, dynamic> toJson() => {
+        'categoryId': categoryId,
+        'title': title,
+        'color': color,
+        'icon': icon,
+      };
+
+  // Take DOcumentSnapshot and return User model
+  static Category fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+
+    return Category(
+      categoryId: snapshot['categoryId'],
+      title: snapshot['title'],
+      color: snapshot['color'],
+      icon: snapshot['icon'],
+    );
+  }
+}
