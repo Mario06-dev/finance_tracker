@@ -12,6 +12,8 @@ import 'add_transaction_pages/page_2.dart';
 import 'add_transaction_pages/page_3.dart';
 import 'add_transaction_pages/page_4.dart';
 
+late PageController pageController;
+
 // ignore: must_be_immutable
 class AddTransScreen extends StatefulWidget {
   int selectedIndex;
@@ -23,7 +25,6 @@ class AddTransScreen extends StatefulWidget {
 }
 
 class _AddTransScreenState extends State<AddTransScreen> {
-  late PageController pageController;
   final TextEditingController _amountController = TextEditingController();
   //int _page = 0;
   //bool isExpense = true;
@@ -102,7 +103,11 @@ class _AddTransScreenState extends State<AddTransScreen> {
                     leftTitle: 'Category',
                     leftValue: '-',
                     rightTitle: 'Date',
-                    rightValue: DateFormat.MMMd().format(date),
+                    rightValue: date.day == DateTime.now().day
+                        ? 'Today'
+                        : date.day == DateTime.now().day - 1
+                            ? 'Yesterday'
+                            : DateFormat.MMMd().format(date),
                     icon: Icons.category,
                     isOptionOne: false,
                   ),
@@ -120,7 +125,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
                   const Text('Please follow the instructions down bellow'),
                   const SizedBox(height: 20),
                   Container(
-                    height: 90,
+                    height: 100,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -191,77 +196,82 @@ class CustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 16,
-          //backgroundColor: isOptionOne ? Colors.redAccent : primaryColor,
-          backgroundColor:
-              isOptionOne || isDescription ? Colors.white : primaryColor,
-          child: Icon(
-            //isExpense ? Icons.arrow_downward : Icons.arrow_upward,
-            isOptionOne
-                ? leftValue == 'Expense'
-                    ? CupertinoIcons.arrowtriangle_down_fill
-                    : CupertinoIcons.arrowtriangle_up_fill
-                : icon,
-            //color: Colors.white,
-            //color: isExpense ? Colors.redAccent : primaryColor,
-            color: isOptionOne || isDescription
-                ? leftValue == 'Expense'
-                    ? Colors.red
-                    : primaryColor
-                : Colors.white,
-            size: 18,
+    return GestureDetector(
+      onTap: () {
+        pageController.jumpToPage(3);
+      },
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 16,
+            //backgroundColor: isOptionOne ? Colors.redAccent : primaryColor,
+            backgroundColor:
+                isOptionOne || isDescription ? Colors.white : primaryColor,
+            child: Icon(
+              //isExpense ? Icons.arrow_downward : Icons.arrow_upward,
+              isOptionOne
+                  ? leftValue == 'Expense'
+                      ? CupertinoIcons.arrowtriangle_down_fill
+                      : CupertinoIcons.arrowtriangle_up_fill
+                  : icon,
+              //color: Colors.white,
+              //color: isExpense ? Colors.redAccent : primaryColor,
+              color: isOptionOne || isDescription
+                  ? leftValue == 'Expense'
+                      ? Colors.red
+                      : primaryColor
+                  : Colors.white,
+              size: 18,
+            ),
           ),
-        ),
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              leftTitle,
-              style: const TextStyle(
-                color: textColor,
-                fontSize: 12,
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                leftTitle,
+                style: const TextStyle(
+                  color: textColor,
+                  fontSize: 12,
+                ),
               ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              leftValue,
-              style: const TextStyle(
-                color: blackTextColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 5),
+              Text(
+                leftValue,
+                style: const TextStyle(
+                  color: blackTextColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
-        ),
-        const Spacer(),
-        isDoubleContent
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    rightTitle,
-                    style: const TextStyle(
-                      color: textColor,
-                      fontSize: 12,
+            ],
+          ),
+          const Spacer(),
+          isDoubleContent
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      rightTitle,
+                      style: const TextStyle(
+                        color: textColor,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    rightValue,
-                    style: const TextStyle(
-                      color: blackTextColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(height: 5),
+                    Text(
+                      rightValue,
+                      style: const TextStyle(
+                        color: blackTextColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              )
-            : Container(),
-      ],
+                  ],
+                )
+              : Container(),
+        ],
+      ),
     );
   }
 }

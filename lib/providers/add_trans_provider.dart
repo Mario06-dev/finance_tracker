@@ -6,6 +6,8 @@ class AddTransProvider with ChangeNotifier {
   String _description = '';
   DateTime _date = DateTime.now();
 
+  /* ===================== GETTERS ===================== */
+
   bool get getisExpense => _isExpense;
 
   double get getAmount => _amount;
@@ -13,6 +15,8 @@ class AddTransProvider with ChangeNotifier {
   String get getDescription => _description;
 
   DateTime get getDate => _date;
+
+  /* ===================== SETTERS ===================== */
 
   void setisExpense(bool value) {
     _isExpense = value;
@@ -32,6 +36,16 @@ class AddTransProvider with ChangeNotifier {
 
   void setDate(DateTime date) {
     _date = date;
+    notifyListeners();
+  }
+
+  /* ===================== FUNCTIONS ===================== */
+
+  void resetValues() {
+    _isExpense = true;
+    _amount = 0.0;
+    _description = '';
+    _date = DateTime.now();
     notifyListeners();
   }
 }

@@ -41,6 +41,7 @@ class _Page4State extends State<Page4> {
           onTap: () {
             Provider.of<AddTransProvider>(context, listen: false)
                 .setDescription(_descriptionController.text);
+            FocusManager.instance.primaryFocus?.unfocus();
             widget.pageController.animateToPage(
               5,
               duration: const Duration(milliseconds: 500),

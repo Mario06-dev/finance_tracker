@@ -17,7 +17,7 @@ class Page2 extends StatefulWidget {
 class _Page2State extends State<Page2> {
   bool isExpense = true;
   // TEMP value
-  TextEditingController _amountController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
 
   @override
   void dispose() {
@@ -34,7 +34,7 @@ class _Page2State extends State<Page2> {
             controller: _amountController,
             hintText: 'Enter amount...',
             labelText: 'Amount',
-            textInputType: TextInputType.number,
+            textInputType: const TextInputType.numberWithOptions(decimal: true),
           ),
         ),
         const SizedBox(width: 100),
@@ -42,8 +42,19 @@ class _Page2State extends State<Page2> {
           child: GestureDetector(
             onTap: () {
               if (_amountController.text.isNotEmpty) {
+                if (_amountController.text.contains(',')) {
+                  _amountController.text =
+                      _amountController.text.replaceAll(',', '.');
+                  //amountTrueValue = value;
+                  //_newTransaction.amount = double.parse(amountTrueValue);
+                } //else {
+                //amountTrueValue = value;
+                //_newTransaction.amount = double.parse(amountTrueValue);
+                //}
+
                 Provider.of<AddTransProvider>(context, listen: false)
                     .setAmount(_amountController.text);
+                FocusManager.instance.primaryFocus?.unfocus();
                 widget.pageController.animateToPage(
                   2,
                   duration: const Duration(milliseconds: 500),
