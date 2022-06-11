@@ -70,14 +70,20 @@ class _Page6State extends State<Page6> {
     return GestureDetector(
       onTap: () {
         // Adding transaction to DB
-        uploadTransaction(
-          user!.uid,
-          isExpense,
-          amount,
-          // TODO: Add Category field
-          date,
-          description,
-        );
+
+        if (amount > 0) {
+          // Also add if category is selected check
+          uploadTransaction(
+            user!.uid,
+            isExpense,
+            amount,
+            // TODO: Add Category field
+            date,
+            description,
+          );
+        } else {
+          showSnackBar('PLease enter amount', context);
+        }
 
         // Resetting values
         Provider.of<AddTransProvider>(context, listen: false).resetValues();

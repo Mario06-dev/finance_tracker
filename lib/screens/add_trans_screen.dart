@@ -184,6 +184,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
                       //physics: const BouncingScrollPhysics(),
                       controller: pageController,
                       onPageChanged: onPageChanged,
