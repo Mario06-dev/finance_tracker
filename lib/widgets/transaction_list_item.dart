@@ -9,6 +9,8 @@ class TransListItem extends StatelessWidget {
   final String title;
   final String description;
   final double amount;
+  final IconData icon;
+  final Color iconColor;
 
   const TransListItem({
     Key? key,
@@ -16,6 +18,8 @@ class TransListItem extends StatelessWidget {
     required this.title,
     required this.description,
     required this.amount,
+    required this.icon,
+    required this.iconColor,
   }) : super(key: key);
 
   @override
@@ -24,15 +28,23 @@ class TransListItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
-          Container(
+          CircleAvatar(
+            backgroundColor: Colors.grey[100],
+            child: Icon(
+              icon,
+              size: 16,
+              color: iconColor,
+            ),
+          ),
+          /* Container(
             width: 8,
             height: 8,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: color,
             ),
-          ),
-          const SizedBox(width: 20),
+          ), */
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
