@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class AuthMethods {
   // Instance of FirebaseAuth class
@@ -53,14 +52,14 @@ class AuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-        // Creating user model
+        // Creating new UserModel
         UserModel user = UserModel(
           name: name,
           uid: cred.user!.uid,
           email: email,
         );
 
-        // Add user to database
+        // Adding newly created user to CloudFirestore DB
         await _firestore
             .collection('users')
             .doc(cred.user!.uid)

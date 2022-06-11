@@ -45,23 +45,40 @@ class _Page2State extends State<Page2> {
                 if (_amountController.text.contains(',')) {
                   _amountController.text =
                       _amountController.text.replaceAll(',', '.');
-                  //amountTrueValue = value;
-                  //_newTransaction.amount = double.parse(amountTrueValue);
-                } //else {
-                //amountTrueValue = value;
-                //_newTransaction.amount = double.parse(amountTrueValue);
-                //}
-
-                Provider.of<AddTransProvider>(context, listen: false)
-                    .setAmount(_amountController.text);
-                FocusManager.instance.primaryFocus?.unfocus();
-                widget.pageController.animateToPage(
-                  2,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeIn,
-                );
+                  if ((double.tryParse(_amountController.text) != null)) {
+                    // ACTIONS
+                    Provider.of<AddTransProvider>(context, listen: false)
+                        .setAmount(_amountController.text);
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    widget.pageController.animateToPage(
+                      2,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeIn,
+                    );
+                  } else {
+                    showSnackBar('Please enter real value', context);
+                  }
+                } else {
+                  if (_amountController.text.contains(',')) {
+                    _amountController.text =
+                        _amountController.text.replaceAll(',', '.');
+                  }
+                  if ((double.tryParse(_amountController.text) != null)) {
+                    // ACTIONS
+                    Provider.of<AddTransProvider>(context, listen: false)
+                        .setAmount(_amountController.text);
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    widget.pageController.animateToPage(
+                      2,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeIn,
+                    );
+                  } else {
+                    showSnackBar('Please enter real value', context);
+                  }
+                }
               } else {
-                showSnackBar('Please enter amount', context);
+                showSnackBar('You must enter some value', context);
               }
             },
             child: const SmallActionButton(),
