@@ -26,31 +26,34 @@ class _Page4State extends State<Page4> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: TextFieldInput(
-            controller: _descriptionController,
-            hintText: 'Enter description',
-            labelText: 'Description',
-            textInputType: TextInputType.text,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFieldInput(
+              controller: _descriptionController,
+              hintText: 'Enter description',
+              labelText: 'Description',
+              textInputType: TextInputType.text,
+            ),
           ),
-        ),
-        const SizedBox(width: 60),
-        GestureDetector(
-          onTap: () {
-            Provider.of<AddTransProvider>(context, listen: false)
-                .setDescription(_descriptionController.text);
-            FocusManager.instance.primaryFocus?.unfocus();
-            widget.pageController.animateToPage(
-              5,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeIn,
-            );
-          },
-          child: const SmallActionButton(),
-        ),
-      ],
+          const SizedBox(width: 60),
+          GestureDetector(
+            onTap: () {
+              Provider.of<AddTransProvider>(context, listen: false)
+                  .setDescription(_descriptionController.text);
+              FocusManager.instance.primaryFocus?.unfocus();
+              widget.pageController.animateToPage(
+                5,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeIn,
+              );
+            },
+            child: const SmallActionButton(),
+          ),
+        ],
+      ),
     );
   }
 }

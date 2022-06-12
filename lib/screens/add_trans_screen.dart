@@ -128,11 +128,11 @@ class _AddTransScreenState extends State<AddTransScreen> {
                         onTap: () {
                           pageController.jumpToPage(2);
                         },
-                        child: const AddValueFieldLeft(
-                          icon: Icons.category,
+                        child: AddValueFieldLeft(
+                          icon: _provider.getCategory.icon,
                           isAvatar: true,
                           title: 'Category',
-                          value: '-',
+                          value: _provider.getCategory.title,
                         ),
                       ),
                       InkWell(
@@ -169,7 +169,6 @@ class _AddTransScreenState extends State<AddTransScreen> {
                   const SizedBox(height: 20),
                   Container(
                     height: 100,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -191,7 +190,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
                       children: [
                         Page1(pageController: pageController),
                         Page2(pageController: pageController),
-                        Page3(),
+                        Page3(pageController: pageController),
                         Page5(pageController: pageController),
                         Page4(pageController: pageController),
                         Page6(),
@@ -261,11 +260,13 @@ class AddValueFieldLeft extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final _provider = Provider.of<AddTransProvider>(context);
+
     return Row(
       children: [
         CircleAvatar(
           radius: 16,
-          backgroundColor: isAvatar ? primaryColor : Colors.white,
+          backgroundColor: isAvatar ? Colors.grey[100] : Colors.white,
           child: Icon(
             icon,
             color: isExpenseField
@@ -273,7 +274,7 @@ class AddValueFieldLeft extends StatelessWidget {
                     ? Colors.red
                     : Colors.greenAccent
                 : isAvatar
-                    ? Colors.white
+                    ? Provider.of<AddTransProvider>(context).getCategory.color
                     : primaryColor,
             //color: isAvatar ? Colors.white : primaryColor,
             size: 18,

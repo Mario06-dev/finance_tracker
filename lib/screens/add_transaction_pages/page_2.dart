@@ -27,64 +27,68 @@ class _Page2State extends State<Page2> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: TextFieldInput(
-            controller: _amountController,
-            hintText: 'Enter amount...',
-            labelText: 'Amount',
-            textInputType: const TextInputType.numberWithOptions(decimal: true),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFieldInput(
+              controller: _amountController,
+              hintText: 'Enter amount...',
+              labelText: 'Amount',
+              textInputType:
+                  const TextInputType.numberWithOptions(decimal: true),
+            ),
           ),
-        ),
-        const SizedBox(width: 100),
-        GestureDetector(
-          child: GestureDetector(
-            onTap: () {
-              if (_amountController.text.isNotEmpty) {
-                if (_amountController.text.contains(',')) {
-                  _amountController.text =
-                      _amountController.text.replaceAll(',', '.');
-                  if ((double.tryParse(_amountController.text) != null)) {
-                    // ACTIONS
-                    Provider.of<AddTransProvider>(context, listen: false)
-                        .setAmount(_amountController.text);
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    widget.pageController.animateToPage(
-                      2,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                    );
-                  } else {
-                    showSnackBar('Please enter real value', context);
-                  }
-                } else {
+          const SizedBox(width: 100),
+          GestureDetector(
+            child: GestureDetector(
+              onTap: () {
+                if (_amountController.text.isNotEmpty) {
                   if (_amountController.text.contains(',')) {
                     _amountController.text =
                         _amountController.text.replaceAll(',', '.');
-                  }
-                  if ((double.tryParse(_amountController.text) != null)) {
-                    // ACTIONS
-                    Provider.of<AddTransProvider>(context, listen: false)
-                        .setAmount(_amountController.text);
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    widget.pageController.animateToPage(
-                      2,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                    );
+                    if ((double.tryParse(_amountController.text) != null)) {
+                      // ACTIONS
+                      Provider.of<AddTransProvider>(context, listen: false)
+                          .setAmount(_amountController.text);
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      widget.pageController.animateToPage(
+                        2,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
+                    } else {
+                      showSnackBar('Please enter real value', context);
+                    }
                   } else {
-                    showSnackBar('Please enter real value', context);
+                    if (_amountController.text.contains(',')) {
+                      _amountController.text =
+                          _amountController.text.replaceAll(',', '.');
+                    }
+                    if ((double.tryParse(_amountController.text) != null)) {
+                      // ACTIONS
+                      Provider.of<AddTransProvider>(context, listen: false)
+                          .setAmount(_amountController.text);
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      widget.pageController.animateToPage(
+                        2,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
+                    } else {
+                      showSnackBar('Please enter real value', context);
+                    }
                   }
+                } else {
+                  showSnackBar('You must enter some value', context);
                 }
-              } else {
-                showSnackBar('You must enter some value', context);
-              }
-            },
-            child: const SmallActionButton(),
+              },
+              child: const SmallActionButton(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -124,7 +124,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 iconSize: 30.0,
                 padding: const EdgeInsets.only(left: 28.0),
                 icon: Icon(
-                  Icons.notifications,
+                  _page == 2
+                      ? CupertinoIcons.graph_circle_fill
+                      : CupertinoIcons.graph_circle,
                   color: _page == 2 ? primaryColor : Colors.grey[400],
                 ),
                 onPressed: () {

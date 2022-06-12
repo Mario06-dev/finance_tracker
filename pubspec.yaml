@@ -36,6 +36,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.1.59
   intl: ^0.17.0
   uuid: ^3.0.6
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   

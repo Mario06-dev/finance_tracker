@@ -15,10 +15,6 @@ class Page5 extends StatefulWidget {
 }
 
 class _Page5State extends State<Page5> {
-  bool isExpense = true;
-  // TEMP value
-  final TextEditingController _amountController = TextEditingController();
-
   showAlertDialog(BuildContext context) {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
@@ -63,12 +59,6 @@ class _Page5State extends State<Page5> {
         return alert;
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _amountController.dispose();
-    super.dispose();
   }
 
   @override
