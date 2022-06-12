@@ -1,4 +1,3 @@
-import 'package:finance_tracker/models/parent_category_model.dart';
 import 'package:flutter/material.dart';
 import '../models/category_model.dart';
 

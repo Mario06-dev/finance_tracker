@@ -8,7 +8,7 @@ class TransactionModel {
   final String uid;
   final bool isExpense;
   final double amount;
-  // TODO: Add Category field
+  final String category;
   final DateTime date;
   final String description;
 
@@ -17,7 +17,7 @@ class TransactionModel {
     required this.uid,
     required this.isExpense,
     required this.amount,
-    // TODO: Add Category field part
+    required this.category,
     required this.date,
     required this.description,
   });
@@ -28,7 +28,7 @@ class TransactionModel {
         'uid': uid,
         'isExpense': isExpense,
         'amount': amount,
-        // TODO: Add Category field part
+        'category': category,
         'date': date,
         'description': description,
       };
@@ -41,7 +41,7 @@ class TransactionModel {
       transId: snapshot['transId'],
       uid: snapshot['uid'],
       isExpense: snapshot['isExpense'],
-      // TODO: Add Category field part
+      category: snapshot['category'],
       amount: snapshot['amount'],
       date: snapshot['date'],
       description: snapshot['description'],

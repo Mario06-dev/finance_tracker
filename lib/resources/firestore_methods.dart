@@ -11,7 +11,7 @@ class FirestoreMethods {
     String uid,
     bool isExpense,
     double amount,
-    // TODO: Add Category field
+    String category,
     DateTime date,
     String description,
   ) async {
@@ -25,7 +25,7 @@ class FirestoreMethods {
         uid: uid,
         isExpense: isExpense,
         amount: amount,
-        // TODO: Add Category field part
+        category: category,
         date: date,
         description: description,
       );

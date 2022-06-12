@@ -1,6 +1,7 @@
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/resources/firestore_methods.dart';
+import 'package:finance_tracker/screens/records_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/add_trans_provider.dart';
@@ -21,7 +22,7 @@ class _Page6State extends State<Page6> {
     String uid,
     bool isExpense,
     double amount,
-    // TODO: Add Category field
+    String category,
     DateTime date,
     String description,
   ) async {
@@ -33,18 +34,20 @@ class _Page6State extends State<Page6> {
         uid,
         isExpense,
         amount,
-        // TODO: Add Category field
+        category,
         date,
         description,
       );
 
       if (res == 'success') {
-        print('In SUCCESS');
         setState(() {
           _isLoading = false;
         });
         // ignore: use_build_context_synchronously
-        showSnackBar('Transaction Added!', context);
+        //showSnackBar('Transaction Added!', context);
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => RecordsScreen()));
       } else {
         setState(() {
           _isLoading = true;
@@ -66,6 +69,7 @@ class _Page6State extends State<Page6> {
     double amount = provider.getAmount;
     String description = provider.getDescription;
     DateTime date = provider.getDate;
+    String category = provider.getCategory.title;
 
     return GestureDetector(
       onTap: () {
@@ -77,12 +81,12 @@ class _Page6State extends State<Page6> {
             user!.uid,
             isExpense,
             amount,
-            // TODO: Add Category field
+            category,
             date,
             description,
           );
         } else {
-          showSnackBar('PLease enter amount', context);
+          showSnackBar('Please enter amount', context);
         }
 
         // Resetting values
