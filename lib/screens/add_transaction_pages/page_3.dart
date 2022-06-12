@@ -21,11 +21,13 @@ class _Page3State extends State<Page3> {
           MaterialPageRoute(builder: (context) => const ChooseCategoryScreen()),
         );
 
-        widget.pageController.animateToPage(
-          result,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeIn,
-        );
+        if (result != null) {
+          widget.pageController.animateToPage(
+            result,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeIn,
+          );
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

@@ -35,13 +35,55 @@ List<Category> categories = [
     icon: Icons.delivery_dining,
     parentCategoryTitle: 'Eating',
   ),
+  const Category(
+    categoryId: '',
+    title: 'Bakery',
+    color: eatingColor,
+    icon: Icons.bakery_dining,
+    parentCategoryTitle: 'Eating',
+  ),
 
   // ==================== SHOPPING ====================
   const Category(
     categoryId: '',
-    title: 'Market',
+    title: 'Market & Store',
     color: shoppingColor,
     icon: Icons.shopping_bag,
+    parentCategoryTitle: 'Shopping',
+  ),
+  const Category(
+    categoryId: '',
+    title: 'Clothes & Shoes',
+    color: shoppingColor,
+    icon: Icons.checkroom,
+    parentCategoryTitle: 'Shopping',
+  ),
+  const Category(
+    categoryId: '',
+    title: 'Health & Beauty',
+    color: shoppingColor,
+    icon: Icons.spa,
+    parentCategoryTitle: 'Shopping',
+  ),
+  const Category(
+    categoryId: '',
+    title: 'Home',
+    color: shoppingColor,
+    icon: Icons.house,
+    parentCategoryTitle: 'Shopping',
+  ),
+  const Category(
+    categoryId: '',
+    title: 'Electronics & Accessories',
+    color: shoppingColor,
+    icon: Icons.cable,
+    parentCategoryTitle: 'Shopping',
+  ),
+  const Category(
+    categoryId: '',
+    title: 'Gifts',
+    color: shoppingColor,
+    icon: Icons.redeem,
     parentCategoryTitle: 'Shopping',
   ),
 

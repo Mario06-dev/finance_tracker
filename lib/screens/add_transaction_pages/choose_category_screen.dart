@@ -154,7 +154,32 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                 itemCount: _categories.length,
                 itemBuilder: (context, index) {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      index != 0
+                          ? (_categories[index].parentCategoryTitle !=
+                                  _categories[index - 1].parentCategoryTitle)
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 20, top: 10),
+                                  child: Text(
+                                    _categories[index].parentCategoryTitle,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                )
+                              : Container()
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 20, top: 10),
+                              child: Text(
+                                _categories[index].parentCategoryTitle,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
                       InkWell(
                         onTap: () {
                           Provider.of<AddTransProvider>(context, listen: false)
