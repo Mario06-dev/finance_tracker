@@ -70,7 +70,7 @@ class _TransListItemState extends State<TransListItem> {
                 widget.snap['category'],
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                  fontSize: 14,
                   color: blackTextColor,
                 ),
               ),

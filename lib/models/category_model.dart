@@ -2,7 +2,6 @@
     	Category Model
  */
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finance_tracker/models/parent_category_model.dart';
 import 'package:flutter/material.dart';
 
 class Category {

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_tracker/colors.dart';
-import 'package:finance_tracker/models/transaction_model.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
 import 'package:finance_tracker/widgets/transaction_list_item.dart';
@@ -20,7 +19,44 @@ class RecordsScreen extends StatefulWidget {
 class _RecordsScreenState extends State<RecordsScreen> {
   @override
   Widget build(BuildContext context) {
+    // Getting current loggedIn user
     UserModel? user = Provider.of<UserProvider>(context).getUser;
+
+    Widget _buildTransaction(dynamic snap, Timestamp dateBefore) {
+      // Current transaction date
+      DateTime currentDate = (snap['date'] as Timestamp).toDate();
+
+      // Previous transaction date
+      DateTime previousDate = dateBefore.toDate();
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          !(currentDate.day == previousDate.day)
+              ? Column(
+                  children: [
+                    //const SizedBox(height: 10),
+                    DateDisplay(date: currentDate),
+                  ],
+                )
+              : Container(),
+          TransListItem(snap: snap),
+        ],
+      );
+    }
+
+    Widget _buildFirstTransactions(dynamic snap) {
+      // Current transaction date
+      DateTime currentDate = (snap['date'] as Timestamp).toDate();
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DateDisplay(date: currentDate),
+          TransListItem(snap: snap),
+        ],
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -67,18 +103,32 @@ class _RecordsScreenState extends State<RecordsScreen> {
             }
 
             return ListView.builder(
+              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                return Column(
+                // Filtering transactions by date
+                final trans = snapshot.data!.docs;
+                trans.sort((a, b) {
+                  return b['date'].compareTo(a['date']);
+                });
+
+                return index != 0
+                    ? _buildTransaction(
+                        trans[index].data(), trans[index - 1].data()['date'])
+                    : _buildFirstTransactions(trans[index].data());
+                /* return Column(
                   children: [
-                    DateDisplay(date: DateTime.now()),
+                    DateDisplay(
+                        date: (snapshot.data!.docs[index].data()['date']
+                                as Timestamp)
+                            .toDate()),
                     const SizedBox(height: 15),
                     TransListItem(
                       snap: snapshot.data!.docs[index].data(),
                     ),
                   ],
-                );
+                ); */
               },
             );
           },
@@ -167,7 +217,7 @@ class DateDisplay extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           Text(
-            DateFormat('yMMd').format(date),
+            DateFormat.MMMMd('en_US').format(date),
             style: const TextStyle(
               fontSize: 12,
               color: textColor,
