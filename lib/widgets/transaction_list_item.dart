@@ -1,27 +1,35 @@
 import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/constants/categories.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
 
-class TransListItem extends StatelessWidget {
-  final Color color;
+class TransListItem extends StatefulWidget {
+  final snap;
+  /*  final Color color;
   final String title;
   final String description;
   final double amount;
   final IconData icon;
-  final Color iconColor;
+  final Color iconColor; */
 
   const TransListItem({
     Key? key,
-    required this.color,
+    /* required this.color,
     required this.title,
     required this.description,
     required this.amount,
     required this.icon,
-    required this.iconColor,
+    required this.iconColor, */
+    required this.snap,
   }) : super(key: key);
 
+  @override
+  State<TransListItem> createState() => _TransListItemState();
+}
+
+class _TransListItemState extends State<TransListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,9 +39,19 @@ class TransListItem extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Colors.grey[100],
             child: Icon(
-              icon,
+              categories
+                  .where(
+                      (category) => category.title == widget.snap['category'])
+                  .toList()
+                  .first
+                  .icon,
               size: 16,
-              color: iconColor,
+              color: categories
+                  .where(
+                      (category) => category.title == widget.snap['category'])
+                  .toList()
+                  .first
+                  .color,
             ),
           ),
           /* Container(
@@ -49,7 +67,7 @@ class TransListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                widget.snap['category'],
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -58,7 +76,7 @@ class TransListItem extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Text(
-                description,
+                widget.snap['description'],
                 style: const TextStyle(
                   fontWeight: FontWeight.w100,
                   fontSize: 12,
@@ -67,12 +85,17 @@ class TransListItem extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Text(
-            '- ${amount.toString()}',
-            style: const TextStyle(
+            widget.snap['isExpense'] == true
+                ? '- ${widget.snap['amount'].toStringAsFixed(2)} kn'
+                : '+ ${widget.snap['amount'].toStringAsFixed(2)} kn',
+            style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 14,
+              color: widget.snap['isExpense'] == true
+                  ? blackTextColor
+                  : Colors.green,
             ),
           ),
         ],

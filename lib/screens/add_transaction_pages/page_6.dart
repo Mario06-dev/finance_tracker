@@ -46,8 +46,7 @@ class _Page6State extends State<Page6> {
         // ignore: use_build_context_synchronously
         //showSnackBar('Transaction Added!', context);
         // ignore: use_build_context_synchronously
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => RecordsScreen()));
+        Navigator.of(context).pop();
       } else {
         setState(() {
           _isLoading = true;

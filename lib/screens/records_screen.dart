@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/models/transaction_model.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
 import 'package:finance_tracker/widgets/transaction_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class RecordsScreen extends StatefulWidget {
@@ -52,7 +55,35 @@ class _RecordsScreenState extends State<RecordsScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: ListView.builder(
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('transactions')
+              .where('uid', isEqualTo: user!.uid)
+              .snapshots(),
+          builder: (context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    DateDisplay(date: DateTime.now()),
+                    const SizedBox(height: 15),
+                    TransListItem(
+                      snap: snapshot.data!.docs[index].data(),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+        /* ListView.builder(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.zero,
           itemCount: 10,
@@ -109,7 +140,40 @@ class _RecordsScreenState extends State<RecordsScreen> {
               ],
             );
           },
-        ),
+        ), */
+      ),
+    );
+  }
+}
+
+class DateDisplay extends StatelessWidget {
+  final DateTime date;
+
+  const DateDisplay({Key? key, required this.date}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 30, bottom: 25),
+      child: Row(
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[400],
+            ),
+          ),
+          const SizedBox(width: 20),
+          Text(
+            DateFormat('yMMd').format(date),
+            style: const TextStyle(
+              fontSize: 12,
+              color: textColor,
+            ),
+          ),
+        ],
       ),
     );
   }

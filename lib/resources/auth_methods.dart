@@ -19,6 +19,11 @@ class AuthMethods {
     return UserModel.fromSnap(snap);
   }
 
+  // Signing out user
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
   // Logging in user
   Future<String> loginUser(
       {required String email, required String password}) async {

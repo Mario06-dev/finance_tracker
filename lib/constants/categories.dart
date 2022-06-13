@@ -4,13 +4,13 @@ import '../models/category_model.dart';
 // All categories colors
 const Color eatingColor = Colors.red;
 const Color shoppingColor = Colors.blue;
-const Color lifeAndEnterColor = Colors.green;
+const Color lifeAndEnterColor = Colors.indigoAccent;
 const Color vehicleColor = Colors.deepPurple;
 const Color transportationColor = Colors.purple;
 const Color housingColor = Colors.orange;
 const Color financialExpensesColor = Colors.brown;
 const Color drinksColor = Colors.teal;
-const Color incomeColor = Colors.yellow;
+const Color incomeColor = Colors.green;
 
 // List of all parent categories
 /* List<ParentCategory> parentCategories = [
@@ -288,6 +288,13 @@ List<Category> categories = [
   const Category(
     categoryId: '',
     title: 'Paycheck',
+    color: incomeColor,
+    icon: Icons.price_check,
+    parentCategoryTitle: 'Income',
+  ),
+  const Category(
+    categoryId: '',
+    title: 'Tips',
     color: incomeColor,
     icon: Icons.price_check,
     parentCategoryTitle: 'Income',
