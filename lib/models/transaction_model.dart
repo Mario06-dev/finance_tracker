@@ -47,4 +47,16 @@ class TransactionModel {
       description: snapshot['description'],
     );
   }
+
+  static TransactionModel fromJson(Map<String, dynamic> json) {
+    return TransactionModel(
+      transId: json['transId'] ?? '',
+      uid: json['uid'] ?? '',
+      amount: json['amount'].toDouble(),
+      category: json['category'],
+      description: json['description'],
+      date: (json['date'] as Timestamp).toDate(),
+      isExpense: json['isExpense'],
+    );
+  }
 }

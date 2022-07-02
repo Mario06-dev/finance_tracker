@@ -2,12 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
+import 'package:finance_tracker/resources/db_service.dart';
+import 'package:finance_tracker/resources/filtering_methods.dart';
 import 'package:finance_tracker/widgets/transaction_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../models/transaction_model.dart';
 
 class RecordsScreen extends StatefulWidget {
   const RecordsScreen({Key? key}) : super(key: key);
@@ -17,12 +21,28 @@ class RecordsScreen extends StatefulWidget {
 }
 
 class _RecordsScreenState extends State<RecordsScreen> {
+  /* ===================== VARIABLES  =====================*/
+
+  // Filtering methods services
+  FilteringMethods filtering = FilteringMethods();
+
   // Bool variable for controlling show of filters panel
   bool filtersExpanded = false;
+
+  // Bool variable for controlling hsow of search box
+  bool searchExpanded = false;
 
   // Segment Controll controll values
   int? filterTimeSegValue = 0;
   int? filterTypeSegValue = 0;
+
+  // Used for filtering
+  String searchWord = '';
+
+  // Used for controlling search input text
+  final TextEditingController _searchController = TextEditingController();
+
+/* ===================== FUNCTIONS  =====================*/
 
   // Building function for time segment Contianer
   Widget buildSegmentTime(String text, int index) {
@@ -46,12 +66,12 @@ class _RecordsScreenState extends State<RecordsScreen> {
     );
   }
 
-  Widget _buildTransaction(dynamic snap, Timestamp dateBefore) {
+  Widget _buildTransaction(TransactionModel transaction, DateTime dateBefore) {
     // Current transaction date
-    DateTime currentDate = (snap['date'] as Timestamp).toDate();
+    DateTime currentDate = transaction.date;
 
     // Previous transaction date
-    DateTime previousDate = dateBefore.toDate();
+    DateTime previousDate = dateBefore;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,27 +84,29 @@ class _RecordsScreenState extends State<RecordsScreen> {
                 ],
               )
             : Container(),
-        TransListItem(snap: snap),
+        TransListItem(transaction: transaction),
       ],
     );
   }
 
-  Widget _buildFirstTransactions(dynamic snap) {
+  Widget _buildFirstTransactions(TransactionModel transaction) {
     // Current transaction date
-    DateTime currentDate = (snap['date'] as Timestamp).toDate();
+    DateTime currentDate = transaction.date;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DateDisplay(date: currentDate),
-        TransListItem(snap: snap),
+        TransListItem(transaction: transaction),
       ],
     );
   }
 
+  /* ===================== BUILD METHOD  =====================*/
+
   @override
   Widget build(BuildContext context) {
-    // Getting current loggedIn user
+    // Getting current logged in user
     UserModel? user = Provider.of<UserProvider>(context).getUser;
 
     return Scaffold(
@@ -103,9 +125,14 @@ class _RecordsScreenState extends State<RecordsScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              CupertinoIcons.search,
+            onPressed: () {
+              setState(() {
+                searchExpanded = !searchExpanded;
+              });
+            },
+            icon: Icon(
+              !searchExpanded ? CupertinoIcons.search : Icons.close,
+              size: 20,
               color: blackTextColor,
             ),
           ),
@@ -183,36 +210,114 @@ class _RecordsScreenState extends State<RecordsScreen> {
                   ),
                 )
               : Container(),
+          searchExpanded
+              ? Container(
+                  width: double.infinity,
+                  //height: 40,
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black12,
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        CupertinoIcons.search,
+                        color: Colors.black38,
+                        size: 18,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: TextField(
+                          cursorColor: primaryColor,
+                          controller: _searchController,
+                          onChanged: (value) {
+                            setState(() {
+                              searchWord = value;
+                            });
+                          },
+                          style: const TextStyle(
+                            color: Colors.black38,
+                            fontSize: 14,
+                          ),
+                          decoration: const InputDecoration(
+                            //labelText: 'Search transactions ...',
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            labelStyle: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black38,
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            searchWord = '';
+                            _searchController.text = '';
+                          });
+                        },
+                        child: const Icon(
+                          Icons.close,
+                          color: Colors.black38,
+                          size: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('transactions')
-                    .where('uid', isEqualTo: user!.uid)
-                    .snapshots(),
-                builder: (context,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
+              child: StreamBuilder<List<TransactionModel>>(
+                stream: DatabaseServices().getTransactionsStream(user!),
+                builder: (context, snapshot) {
+                  print(snapshot.error.toString());
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: Text('NO TRANSACTIONSs'),
+                    );
+                  }
+
+                  List<TransactionModel> transactions =
+                      filtering.getFilteredTrans2(
+                    snapshot.data!,
+                    filterTimeSegValue!,
+                    filterTypeSegValue!,
+                    searchWord,
+                  );
+
+                  transactions = transactions
+                      .where((element) => element.description
+                          .toLowerCase()
+                          .contains(searchWord.toLowerCase()))
+                      .toList();
+
+                  // Sort transactions by date
+                  transactions.sort((a, b) {
+                    return b.date.compareTo(a.date);
+                  });
+
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     padding: EdgeInsets.zero,
-                    itemCount: snapshot.data!.docs.length,
+                    itemCount: transactions.length,
                     itemBuilder: (context, index) {
-                      // Filtering transactions by date
-                      final trans = snapshot.data!.docs;
-                      trans.sort((a, b) {
-                        return b['date'].compareTo(a['date']);
-                      });
-
                       return index != 0
-                          ? _buildTransaction(trans[index].data(),
-                              trans[index - 1].data()['date'])
-                          : _buildFirstTransactions(trans[index].data());
+                          ? _buildTransaction(
+                              transactions[index], transactions[index - 1].date)
+                          : _buildFirstTransactions(transactions[index]);
                       /* return Column(
                         children: [
                           DateDisplay(
