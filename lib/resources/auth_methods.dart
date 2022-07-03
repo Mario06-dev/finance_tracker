@@ -12,7 +12,6 @@ class AuthMethods {
   Future<UserModel> getUserDetails() async {
     // User from FirebaseAuth (NOT CUSTOM MODEL USER)
     User currentUser = _auth.currentUser!;
-
     DocumentSnapshot snap =
         await _firestore.collection('users').doc(currentUser.uid).get();
 

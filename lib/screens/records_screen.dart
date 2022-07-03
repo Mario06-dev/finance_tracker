@@ -6,6 +6,7 @@ import 'package:finance_tracker/resources/filtering_methods.dart';
 import 'package:finance_tracker/widgets/transaction_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -307,6 +308,21 @@ class _RecordsScreenState extends State<RecordsScreen> {
                   transactions.sort((a, b) {
                     return b.date.compareTo(a.date);
                   });
+
+                  if (transactions.isEmpty) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/empty.svg',
+                          width: 100,
+                          height: 100,
+                        ),
+                        const SizedBox(height: 30),
+                        const Text('No transactions yet'),
+                      ],
+                    );
+                  }
 
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
