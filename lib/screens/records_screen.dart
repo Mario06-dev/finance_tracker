@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
@@ -318,18 +317,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
                           ? _buildTransaction(
                               transactions[index], transactions[index - 1].date)
                           : _buildFirstTransactions(transactions[index]);
-                      /* return Column(
-                        children: [
-                          DateDisplay(
-                              date: (snapshot.data!.docs[index].data()['date']
-                                      as Timestamp)
-                                  .toDate()),
-                          const SizedBox(height: 15),
-                          TransListItem(
-                            snap: snapshot.data!.docs[index].data(),
-                          ),
-                        ],
-                      ); */
                     },
                   );
                 },

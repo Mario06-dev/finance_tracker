@@ -1,7 +1,6 @@
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/providers/add_trans_provider.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
-import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +17,14 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

@@ -52,6 +52,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     UserModel? user = Provider.of<UserProvider>(context).getUser;
+    bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
 
     return Scaffold(
       body: user == null
@@ -70,14 +71,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
               ],
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => AddTransScreen(0)));
-        },
-        backgroundColor: primaryColor,
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: keyboardOpen
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AddTransScreen(0)));
+              },
+              backgroundColor: primaryColor,
+              child: Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: SizedBox(
