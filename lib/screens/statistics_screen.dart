@@ -1,4 +1,5 @@
 import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/screens/stats_screens/cash_flow_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_app_bar.dart';
@@ -20,6 +21,7 @@ class StatisticsScreen extends StatelessWidget {
               description:
                   'Lorem ipsum dal amore del ilore at sibilis trend in major uniturmumu',
               image: 'bar-graph',
+              navScreen: CashFlowScreen(),
             ),
             SizedBox(height: 20),
             StatsCard(
@@ -27,6 +29,7 @@ class StatisticsScreen extends StatelessWidget {
               description:
                   'Lorem ipsum dal amore del ilore at sibilis trend in major uniturmumu',
               image: 'report',
+              navScreen: CashFlowScreen(),
             ),
             SizedBox(height: 20),
             StatsCard(
@@ -34,6 +37,7 @@ class StatisticsScreen extends StatelessWidget {
               description:
                   'Lorem ipsum dal amore del ilore at sibilis trend in major uniturmumu',
               image: 'pie-chart',
+              navScreen: CashFlowScreen(),
             ),
             SizedBox(height: 20),
             StatsCard(
@@ -41,6 +45,7 @@ class StatisticsScreen extends StatelessWidget {
               description:
                   'Lorem ipsum dal amore del ilore at sibilis trend in major uniturmumu',
               image: 'report',
+              navScreen: CashFlowScreen(),
             ),
           ],
         ),
@@ -53,12 +58,14 @@ class StatsCard extends StatelessWidget {
   final String title;
   final String description;
   final String image;
+  final Widget navScreen;
 
   const StatsCard({
     Key? key,
     required this.title,
     required this.description,
     required this.image,
+    required this.navScreen,
   }) : super(key: key);
 
   @override
@@ -108,7 +115,12 @@ class StatsCard extends StatelessWidget {
                       color: primaryColor,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => navScreen),
+                    );
+                  },
                 ),
               ],
             ),

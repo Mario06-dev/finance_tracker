@@ -67,10 +67,10 @@ class FilteringMethods {
   }
 
   List<TransactionModel> getFilteredTrans2(
-      List<TransactionModel> givenTransactions,
-      int timeFilter,
-      int typeFilter,
-      String searchWord) {
+    List<TransactionModel> givenTransactions,
+    int timeFilter,
+    int typeFilter,
+  ) {
     // Reference filter date -> final date to filter from
     DateTime filterDate = getFilteredDate(timeFilter);
 

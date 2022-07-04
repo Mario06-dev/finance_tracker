@@ -279,11 +279,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
               child: StreamBuilder<List<TransactionModel>>(
                 stream: DatabaseServices().getTransactionsStream(user!),
                 builder: (context, snapshot) {
-                  print(snapshot.error.toString());
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-
                   if (!snapshot.hasData) {
                     return const Center(
                       child: Text('NO TRANSACTIONSs'),
@@ -295,7 +290,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
                     snapshot.data!,
                     filterTimeSegValue!,
                     filterTypeSegValue!,
-                    searchWord,
                   );
 
                   transactions = transactions
