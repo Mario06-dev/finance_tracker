@@ -21,6 +21,30 @@ const Color incomeColor = Colors.green;
   const ParentCategory(title: 'Transportation', color: Colors.purple),
 ]; */
 
+Map<String, Color> parentCatsAndColors = {
+  'Eating': eatingColor,
+  'Shopping': shoppingColor,
+  'Life & Entertainment': lifeAndEnterColor,
+  'Vehicle': vehicleColor,
+  'Transportation': transportationColor,
+  'Housing': housingColor,
+  'Bar & Cafe': drinksColor,
+  'Financial Expenses': financialExpensesColor,
+  'Income': incomeColor,
+};
+
+List<String> parentCategories = [
+  'Eating',
+  'Shopping',
+  'Life & Entertainment',
+  'Vehicle',
+  'Transportation',
+  'Housing',
+  'Bar & Cafe',
+  'Financial Expenses',
+  'Income'
+];
+
 // List of all categories
 List<Category> categories = [
   // ==================== EATING ====================

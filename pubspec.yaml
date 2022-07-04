@@ -38,6 +38,7 @@ dependencies:
   uuid: ^3.0.6
   sliding_up_panel: ^2.0.0+1
   percent_indicator: ^4.2.2
+  fl_chart: ^0.55.0
 
 dev_dependencies:
   
