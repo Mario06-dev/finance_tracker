@@ -1,5 +1,6 @@
 import 'package:finance_tracker/colors.dart';
 import 'package:finance_tracker/screens/stats_screens/cash_flow_screen.dart';
+import 'package:finance_tracker/screens/stats_screens/reports_screen.dart';
 import 'package:finance_tracker/screens/stats_screens/spendings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class StatisticsScreen extends StatelessWidget {
               description:
                   'Lorem ipsum dal amore del ilore at sibilis trend in major uniturmumu',
               image: 'report',
-              navScreen: CashFlowScreen(),
+              navScreen: ReportsScreen(),
             ),
           ],
         ),

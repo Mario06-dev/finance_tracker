@@ -93,8 +93,6 @@ class SpendingsChartCalc {
 
     Map<String, double> upperCatSumColor = getSumCatMap(transactions);
 
-    print(upperCatSumColor);
-
     for (int k = 0; k <= upperCatSumColor.length - 1; k++) {
       sections.add(PieChartSectionData(
         value: upperCatSumColor.values.elementAt(k),

@@ -136,28 +136,29 @@ class _SpendingsScreenState extends State<SpendingsScreen> {
                   height: 300,
                   //color: Colors.grey.withOpacity(0.1),
                   child: StreamBuilder<List<TransactionModel>>(
-                      stream: DatabaseServices().getTransactionsStream(user!),
-                      builder: (context, snapshot) {
-                        // Print error if there is any
-                        if (snapshot.hasError) {
-                          print('An Error Occured!');
-                          print(snapshot.error.toString());
-                        }
+                    stream: DatabaseServices().getTransactionsStream(user!),
+                    builder: (context, snapshot) {
+                      // Print error if there is any
+                      if (snapshot.hasError) {
+                        print('An Error Occured!');
+                        print(snapshot.error.toString());
+                      }
 
-                        if (snapshot.hasData) {
-                          // Transactions filtered with timeFIlterSegment
-                          final List<TransactionModel> transactions =
-                              filtering.getFilteredTrans2(
-                                  snapshot.data!, _filterTimeSegValue!, 0);
+                      if (snapshot.hasData) {
+                        // Transactions filtered with timeFIlterSegment
+                        final List<TransactionModel> transactions =
+                            filtering.getFilteredTrans2(
+                                snapshot.data!, _filterTimeSegValue!, 0);
 
-                          return ExpensesChart(transactions);
-                          //return Container(color: Colors.grey);
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      }),
+                        return ExpensesChart(transactions);
+                        //return Container(color: Colors.grey);
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
                 ),
                 const SizedBox(height: 500),
               ],
