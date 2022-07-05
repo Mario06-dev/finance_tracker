@@ -1,7 +1,9 @@
-import 'package:finance_tracker/colors.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/providers/add_trans_provider.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
 import 'package:finance_tracker/screens/login_screen.dart';
+import 'package:finance_tracker/themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,35 +37,44 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => UserProvider()),
           ChangeNotifierProvider(create: (_) => AddTransProvider()),
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor: Colors.white,
-            textTheme: GoogleFonts.rubikTextTheme(),
-          ),
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return const BottomNavigation();
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('${snapshot.error}'),
-                  );
-                }
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                    child: CircularProgressIndicator(
-                  color: primaryColor,
-                ));
-              }
+        child: AdaptiveTheme(
+          light: lightModeTheme(),
+          dark: darkModeTheme(),
+          initial: AdaptiveThemeMode.light,
+          builder: (theme, darkTheme) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Finance Tracker',
+              /* theme: ThemeData.light().copyWith(
+                scaffoldBackgroundColor: Colors.white,
+                textTheme: GoogleFonts.rubikTextTheme(),
+              ), */
+              theme: theme,
+              darkTheme: darkTheme,
+              home: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.active) {
+                    if (snapshot.hasData) {
+                      return const BottomNavigation();
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('${snapshot.error}'),
+                      );
+                    }
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ));
+                  }
 
-              return const LoginScreen();
-            },
-          ),
+                  return const LoginScreen();
+                },
+              ),
+            );
+          },
         ),
       ),
     );

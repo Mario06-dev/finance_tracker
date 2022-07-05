@@ -1,5 +1,5 @@
 import 'package:finance_tracker/bottom_navigation.dart';
-import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/signup_screen.dart';
 import 'package:finance_tracker/widgets/text_input_field.dart';

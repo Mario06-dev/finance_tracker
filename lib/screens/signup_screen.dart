@@ -1,4 +1,4 @@
-import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/screens/login_screen.dart';
 import 'package:finance_tracker/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';

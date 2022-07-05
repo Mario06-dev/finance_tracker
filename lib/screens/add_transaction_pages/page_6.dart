@@ -1,4 +1,4 @@
-import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/resources/firestore_methods.dart';
 import 'package:finance_tracker/screens/records_screen.dart';

@@ -1,4 +1,4 @@
-import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/screens/add_transaction_pages/choose_category_screen.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 import 'package:finance_tracker/constants/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../colors.dart';
+import '../../constants/colors.dart';
 import '../../models/category_model.dart';
 import '../../models/transaction_model.dart';
 import '../../resources/stats_calc/categories_calc.dart';

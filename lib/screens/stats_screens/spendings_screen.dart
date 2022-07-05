@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../../colors.dart';
+import '../../constants/colors.dart';
 import '../../models/transaction_model.dart';
 import '../../models/user_model.dart';
 import '../../providers/user_provider.dart';

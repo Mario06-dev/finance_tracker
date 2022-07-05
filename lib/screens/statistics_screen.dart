@@ -1,4 +1,4 @@
-import 'package:finance_tracker/colors.dart';
+import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/screens/stats_screens/cash_flow_screen.dart';
 import 'package:finance_tracker/screens/stats_screens/reports_screen.dart';
 import 'package:finance_tracker/screens/stats_screens/spendings_screen.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../colors.dart';
+import '../constants/colors.dart';
 import '../providers/add_trans_provider.dart';
 import 'add_transaction_pages/page_1.dart';
 import 'add_transaction_pages/page_2.dart';
