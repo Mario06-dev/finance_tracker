@@ -130,7 +130,7 @@ class StatsCard extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.4 - 20,
             child: Center(
-              child: Container(
+              child: SizedBox(
                 //color: Colors.grey,
                 width: 80,
                 height: 50,

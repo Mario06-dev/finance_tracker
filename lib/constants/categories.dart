@@ -278,14 +278,14 @@ List<Category> categories = [
     title: 'Caffe Bar',
     color: drinksColor,
     icon: Icons.coffee,
-    parentCategoryTitle: 'Drinks',
+    parentCategoryTitle: 'Bar & Cafe',
   ),
   const Category(
     categoryId: '',
     title: 'Club',
     color: drinksColor,
     icon: Icons.local_bar,
-    parentCategoryTitle: 'Drinks',
+    parentCategoryTitle: 'Bar & Cafe',
   ),
 
   // ==================== FINANCIAL EXPENSES ====================
