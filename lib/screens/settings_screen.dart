@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:finance_tracker/resources/auth_methods.dart';
 import 'package:finance_tracker/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,12 @@ class SettingsScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const LoginScreen()));
             },
             child: const Text('Sign Out'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              AdaptiveTheme.of(context).toggleThemeMode();
+            },
+            child: const Text('Change Theme'),
           ),
         ],
       ),

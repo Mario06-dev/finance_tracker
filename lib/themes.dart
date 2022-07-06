@@ -9,6 +9,9 @@ ThemeData lightModeTheme() {
     textTheme: GoogleFonts.rubikTextTheme(),
     primaryColor: const Color(0xff5063EE),
     scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+    ),
   );
 }
 

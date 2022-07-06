@@ -19,7 +19,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: bgColor,
+      //backgroundColor: bgColor,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       title: Text(
         title,
         style: GoogleFonts.prompt(

@@ -1,11 +1,6 @@
-import 'package:finance_tracker/constants/colors.dart';
-import 'package:finance_tracker/models/user_model.dart';
-import 'package:finance_tracker/providers/user_provider.dart';
-import 'package:finance_tracker/resources/auth_methods.dart';
 import 'package:finance_tracker/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
