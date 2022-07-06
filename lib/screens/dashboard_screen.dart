@@ -1,6 +1,9 @@
 import 'package:finance_tracker/resources/filtering_methods.dart';
+import 'package:finance_tracker/resources/stats_calc/cash_flow_calc.dart';
+import 'package:finance_tracker/resources/stats_calc/reports_calc.dart';
 import 'package:finance_tracker/screens/stats_screens/spendings_screen.dart';
 import 'package:finance_tracker/widgets/custom_app_bar.dart';
+import 'package:finance_tracker/widgets/dashboard_cards/last_records_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +24,12 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   // Filtering Services
   FilteringMethods filtering = FilteringMethods();
+
+  // Reports Services
+  ReportsCalc reports = ReportsCalc();
+
+  // CashFlow calc
+  CashFlowCalc cashFlowCalc = CashFlowCalc();
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +67,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     ColumnItem(
-                        titleValue: 25, subtitle: 'transactions past month'),
+                        titleValue:
+                            reports.transactionCount(transactions, true) +
+                                reports.transactionCount(transactions, false),
+                        subtitle: 'transactions past month'),
                     ColumnItem(
-                        titleValue: 3456.89, subtitle: 'spent this month'),
-                    ColumnItem(titleValue: 70, subtitle: 'workouts compleated'),
+                        titleValue:
+                            '${cashFlowCalc.cashFlowTotalCalc(transactions).toStringAsFixed(2)} kn',
+                        subtitle: 'past month net balance'),
+                    const ColumnItem(
+                        titleValue: '-', subtitle: ' example to be added'),
                   ],
                 ),
               ),
@@ -77,6 +92,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   );
                 },
                 child: TopExpensesCard(transactions),
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SpendingsScreen()),
+                  );
+                },
+                child: LastRecordsCard(),
               ),
             ],
           );
@@ -112,7 +138,8 @@ class ColumnItem extends StatelessWidget {
           Text(
             titleValue.toString(),
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: 16.sp,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           const SizedBox(height: 10),
