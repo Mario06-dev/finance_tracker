@@ -65,16 +65,16 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
           icon: const Icon(
             CupertinoIcons.xmark,
             size: 20,
-            color: blackTextColor,
+            //color: blackTextColor,
           ),
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: bgColor,
+        //backgroundColor: bgColor,
         title: Text(
           'Choose Category',
           style: GoogleFonts.prompt(
-            color: Colors.black,
+            //color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),
@@ -90,13 +90,14 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.black12,
+                //color: Colors.black12,
+                color: Theme.of(context).shadowColor,
               ),
               child: Row(
                 children: [
                   const Icon(
                     CupertinoIcons.search,
-                    color: Colors.black38,
+                    //color: Colors.black38,
                     size: 18,
                   ),
                   const SizedBox(width: 10),
@@ -110,10 +111,7 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                           filterSearchResults(value);
                         });
                       },
-                      style: const TextStyle(
-                        color: Colors.black38,
-                        fontSize: 14,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                       decoration: const InputDecoration(
                         //labelText: 'Search transactions ...',
                         border: InputBorder.none,
@@ -141,7 +139,7 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                     },
                     child: const Icon(
                       Icons.close,
-                      color: Colors.black38,
+                      //color: Colors.black38,
                       size: 18,
                     ),
                   ),
@@ -164,9 +162,8 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                                       bottom: 20, top: 10),
                                   child: Text(
                                     _categories[index].parentCategoryTitle,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                 )
                               : Container()
@@ -175,9 +172,7 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                                   const EdgeInsets.only(bottom: 20, top: 10),
                               child: Text(
                                 _categories[index].parentCategoryTitle,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                ),
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
                       InkWell(
@@ -189,7 +184,7 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.grey[100],
+                              backgroundColor: Theme.of(context).shadowColor,
                               child: Icon(
                                 _categories[index].icon,
                                 size: 16,
@@ -197,7 +192,8 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                               ),
                             ),
                             const SizedBox(width: 20),
-                            Text(_categories[index].title),
+                            Text(_categories[index].title,
+                                style: Theme.of(context).textTheme.titleMedium),
                           ],
                         ),
                       ),

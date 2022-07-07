@@ -1,4 +1,3 @@
-import 'package:finance_tracker/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,11 +19,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       elevation: 0,
       //backgroundColor: bgColor,
-      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      //backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       title: Text(
         title,
         style: GoogleFonts.prompt(
-          color: Colors.black,
+          //color: Colors.black,
           fontWeight: FontWeight.w500,
           fontSize: 18,
         ),

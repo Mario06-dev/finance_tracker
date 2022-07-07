@@ -59,10 +59,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return Column(
             children: [
               Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   border: Border(
-                    top: BorderSide(width: 1, color: Color(0xffe0dfe7)),
-                    bottom: BorderSide(width: 1, color: Color(0xffe0dfe7)),
+                    top: BorderSide(
+                        width: 1, color: Theme.of(context).shadowColor),
+                    bottom: BorderSide(
+                        width: 1, color: Theme.of(context).shadowColor),
                   ),
                 ),
                 child: Row(
@@ -123,11 +125,11 @@ class ColumnItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80.h,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
           //top: BorderSide(width: 1, color: Color(0xffe0dfe7)),
           //bottom: BorderSide(width: 1, color: Color(0xffe0dfe7)),
-          right: BorderSide(width: 1, color: Color(0xffe0dfe7)),
+          right: BorderSide(width: 1, color: Theme.of(context).shadowColor),
         ),
       ),
       padding: const EdgeInsets.all(15),
@@ -146,9 +148,7 @@ class ColumnItem extends StatelessWidget {
           Text(
             subtitle,
             softWrap: true,
-            style: TextStyle(
-              fontSize: 12.sp,
-            ),
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ],
       ),

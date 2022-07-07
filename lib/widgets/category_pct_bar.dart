@@ -32,15 +32,11 @@ class _CategoryPctBarState extends State<CategoryPctBar> {
           children: [
             Text(
               widget.catName,
-              style: const TextStyle(
-                fontSize: 14,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(
               widget.catSum!.toStringAsFixed(2),
-              style: const TextStyle(
-                fontSize: 14,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ),

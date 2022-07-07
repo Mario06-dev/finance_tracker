@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         child: AdaptiveTheme(
           light: lightModeTheme(),
           dark: darkModeTheme(),
-          initial: AdaptiveThemeMode.light,
+          initial: AdaptiveThemeMode.system,
           builder: (theme, darkTheme) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,

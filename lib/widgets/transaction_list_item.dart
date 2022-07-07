@@ -1,28 +1,13 @@
 import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/constants/categories.dart';
 import 'package:finance_tracker/models/transaction_model.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
 
 class TransListItem extends StatefulWidget {
   final TransactionModel transaction;
-  /*  final Color color;
-  final String title;
-  final String description;
-  final double amount;
-  final IconData icon;
-  final Color iconColor; */
 
   const TransListItem({
     Key? key,
-    /* required this.color,
-    required this.title,
-    required this.description,
-    required this.amount,
-    required this.icon,
-    required this.iconColor, */
     required this.transaction,
   }) : super(key: key);
 
@@ -38,7 +23,8 @@ class _TransListItemState extends State<TransListItem> {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: Colors.grey[100],
+            //backgroundColor: Colors.grey[100],
+            backgroundColor: Theme.of(context).shadowColor,
             child: Icon(
               categories
                   .where((category) =>
@@ -55,34 +41,28 @@ class _TransListItemState extends State<TransListItem> {
                   .color,
             ),
           ),
-          /* Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color,
-            ),
-          ), */
           const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 widget.transaction.category,
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.titleMedium,
+                /* style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
-                  color: blackTextColor,
-                ),
+                  //color: blackTextColor,
+                ), */
               ),
               const SizedBox(height: 5),
               Text(
                 widget.transaction.description,
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.labelSmall,
+                /* style: const TextStyle(
                   fontWeight: FontWeight.w100,
                   fontSize: 12,
                   color: textColor,
-                ),
+                ), */
               ),
             ],
           ),
@@ -91,13 +71,13 @@ class _TransListItemState extends State<TransListItem> {
             widget.transaction.isExpense == true
                 ? '- ${widget.transaction.amount.toStringAsFixed(2)} kn'
                 : '+ ${widget.transaction.amount.toStringAsFixed(2)} kn',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-              color: widget.transaction.isExpense == true
-                  ? blackTextColor
-                  : Colors.green,
-            ),
+            style: widget.transaction.isExpense == true
+                ? Theme.of(context).textTheme.titleSmall
+                : const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Colors.green,
+                  ),
           ),
         ],
       ),

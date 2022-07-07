@@ -66,16 +66,16 @@ class _AddTransScreenState extends State<AddTransScreen> {
           icon: const Icon(
             CupertinoIcons.xmark,
             size: 20,
-            color: blackTextColor,
+            //color: blackTextColor,
           ),
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: bgColor,
+        //backgroundColor: bgColor,
         title: Text(
           'Add transaction',
           style: GoogleFonts.prompt(
-            color: Colors.black,
+            //color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),
@@ -165,21 +165,22 @@ class _AddTransScreenState extends State<AddTransScreen> {
                   ),
                   //Spacer(),
                   const SizedBox(height: 40),
-                  const Text('Please follow the instructions down bellow'),
+                  Text('Please follow the instructions down bellow',
+                      style: Theme.of(context).textTheme.labelSmall),
                   const SizedBox(height: 20),
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
-                      boxShadow: [
+                      /* boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
+                          color: Theme.of(context).shadowColor.withOpacity(0.1),
                           spreadRadius: 10,
                           blurRadius: 5,
                           offset:
                               const Offset(0, 7), // changes position of shadow
                         ),
-                      ],
-                      color: Colors.white,
+                      ], */
+                      color: Theme.of(context).shadowColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: PageView(
@@ -223,19 +224,12 @@ class AddValueFieldRight extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            color: textColor,
-            fontSize: 12,
-          ),
+          style: Theme.of(context).textTheme.labelSmall,
         ),
         const SizedBox(height: 5),
         Text(
           value,
-          style: const TextStyle(
-            color: blackTextColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.labelMedium,
         ),
       ],
     );
@@ -266,7 +260,9 @@ class AddValueFieldLeft extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 16,
-          backgroundColor: isAvatar ? Colors.grey[100] : Colors.white,
+          backgroundColor: isAvatar
+              ? Theme.of(context).shadowColor
+              : Theme.of(context).scaffoldBackgroundColor,
           child: Icon(
             icon,
             color: isExpenseField
@@ -286,19 +282,12 @@ class AddValueFieldLeft extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                color: textColor,
-                fontSize: 12,
-              ),
+              style: Theme.of(context).textTheme.labelSmall,
             ),
             const SizedBox(height: 5),
             Text(
               value,
-              style: const TextStyle(
-                color: blackTextColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ],
         ),

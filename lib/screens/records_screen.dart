@@ -120,7 +120,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
           icon: Icon(
             filtersExpanded ? Icons.close : Icons.sort,
             size: 20,
-            color: blackTextColor,
+            //color: blackTextColor,
           ),
         ),
         actions: [
@@ -133,17 +133,17 @@ class _RecordsScreenState extends State<RecordsScreen> {
             icon: Icon(
               !searchExpanded ? CupertinoIcons.search : Icons.close,
               size: 20,
-              color: blackTextColor,
+              //color: blackTextColor,
             ),
           ),
         ],
         centerTitle: true,
         elevation: 0,
-        backgroundColor: bgColor,
+        //backgroundColor: bgColor,
         title: Text(
           'All transactions',
           style: GoogleFonts.prompt(
-            color: Colors.black,
+            //color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),

@@ -35,12 +35,13 @@ class TopExpensesCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Top expenses',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.titleLarge,
+                /* style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
-                ),
+                ), */
               ),
               GestureDetector(
                 onTap: () {
@@ -55,7 +56,7 @@ class TopExpensesCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          const Text('LAST 30 DAYS', style: TextStyle(fontSize: 12)),
+          Text('LAST 30 DAYS', style: Theme.of(context).textTheme.labelSmall),
           const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,

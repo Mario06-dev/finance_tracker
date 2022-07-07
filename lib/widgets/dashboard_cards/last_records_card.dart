@@ -42,12 +42,9 @@ class _LastRecordsCardState extends State<LastRecordsCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Last records',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Icon(
                 Icons.chevron_right,
