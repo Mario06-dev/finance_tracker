@@ -218,18 +218,19 @@ class _RecordsScreenState extends State<RecordsScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.black12,
+                    //color: Colors.black12,
+                    // ADD SHADOW COLOR
                   ),
                   child: Row(
                     children: [
                       const Icon(
                         CupertinoIcons.search,
-                        color: Colors.black38,
                         size: 18,
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: TextField(
+                          autofocus: true,
                           cursorColor: primaryColor,
                           controller: _searchController,
                           onChanged: (value) {
@@ -237,10 +238,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
                               searchWord = value;
                             });
                           },
-                          style: const TextStyle(
-                            color: Colors.black38,
-                            fontSize: 14,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall,
                           decoration: const InputDecoration(
                             //labelText: 'Search transactions ...',
                             border: InputBorder.none,
@@ -249,10 +247,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
                             errorBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             floatingLabelBehavior: FloatingLabelBehavior.never,
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black38,
-                            ),
                           ),
                         ),
                       ),
@@ -265,7 +259,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
                         },
                         child: const Icon(
                           Icons.close,
-                          color: Colors.black38,
                           size: 18,
                         ),
                       ),

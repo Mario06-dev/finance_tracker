@@ -103,6 +103,7 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
+                      autofocus: true,
                       cursorColor: primaryColor,
                       controller: _searchController,
                       onChanged: (value) {
@@ -120,10 +121,6 @@ class _ChooseCategoryScreenState extends State<ChooseCategoryScreen> {
                         errorBorder: InputBorder.none,
                         disabledBorder: InputBorder.none,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
-                        labelStyle: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black38,
-                        ),
                       ),
                     ),
                   ),
