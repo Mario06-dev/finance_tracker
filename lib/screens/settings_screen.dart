@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/user_provider.dart';
 import '../widgets/custom_app_bar.dart';
+import 'package:finance_tracker/globals.dart' as globals;
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -17,7 +18,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   List<String> themeModes = ['Dark', 'Light', 'System'];
-  String? selectedThemeMode = 'System';
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 underline: const SizedBox(),
                 onChanged: (value) {
                   setState(() {
-                    selectedThemeMode = value;
+                    globals.selectedThemeMode = value!;
                   });
 
                   if (value == 'Light') {
@@ -92,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     AdaptiveTheme.of(context).setSystem();
                   }
                 },
-                value: selectedThemeMode,
+                value: globals.selectedThemeMode,
                 items: themeModes
                     .map(
                       (themeMode) => DropdownMenuItem<String>(
