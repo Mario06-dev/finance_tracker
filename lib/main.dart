@@ -45,10 +45,6 @@ class _MyAppState extends State<MyApp> {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Finance Tracker',
-              /* theme: ThemeData.light().copyWith(
-                scaffoldBackgroundColor: Colors.white,
-                textTheme: GoogleFonts.rubikTextTheme(),
-              ), */
               theme: theme,
               darkTheme: darkTheme,
               home: StreamBuilder(

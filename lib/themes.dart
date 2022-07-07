@@ -40,6 +40,10 @@ ThemeData lightModeTheme() {
     shadowColor: Colors.black.withOpacity(0.1),
     hintColor: Colors.black.withOpacity(0.7),
     scaffoldBackgroundColor: Colors.white,
+    listTileTheme: const ListTileThemeData(
+      iconColor: Colors.black54,
+      textColor: Colors.black54,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
