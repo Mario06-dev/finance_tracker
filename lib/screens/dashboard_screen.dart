@@ -3,6 +3,7 @@ import 'package:finance_tracker/resources/stats_calc/cash_flow_calc.dart';
 import 'package:finance_tracker/resources/stats_calc/reports_calc.dart';
 import 'package:finance_tracker/screens/stats_screens/spendings_screen.dart';
 import 'package:finance_tracker/widgets/custom_app_bar.dart';
+import 'package:finance_tracker/widgets/dashboard_cards/expenses_card.dart';
 import 'package:finance_tracker/widgets/dashboard_cards/last_records_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,6 +106,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   );
                 },
                 child: LastRecordsCard(),
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SpendingsScreen()),
+                  );
+                },
+                child: ExpensesCard(transactions),
               ),
             ],
           );
