@@ -37,7 +37,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
       text,
       style: TextStyle(
         fontSize: 12,
-        color: index == _filterTimeSegValue ? Colors.white : Colors.black54,
+        color: index == _filterTimeSegValue ? Colors.white : Colors.grey,
       ),
     );
   }
@@ -50,7 +50,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
               title,
               style: TextStyle(
                   fontSize: 14,
-                  color: isExpense ? Colors.red : Colors.black,
+                  color: isExpense ? Colors.red : Theme.of(context).splashColor,
                   fontWeight: FontWeight.bold),
             ),
           )
@@ -73,19 +73,17 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black54,
         elevation: 0,
-        backgroundColor: bgColor,
         title: Text(
           'Reports',
           style: GoogleFonts.prompt(
-            color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),
         ),
       ),
       body: SlidingUpPanel(
+        color: Theme.of(context).scaffoldBackgroundColor,
         minHeight: 100,
         isDraggable: false,
         panel: Column(
@@ -130,37 +128,31 @@ class _ReportsScreenState extends State<ReportsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Income & Expenses',
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 22),
                 ),
                 const SizedBox(height: 5),
-                const Text(
-                  'Quick look at reports',
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
+                Text('Quick look at reports',
+                    style: Theme.of(context).textTheme.titleSmall),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Divider(),
                 ),
                 Text(
-                  _filterTimeSegValue == 0
-                      ? 'LAST 7 DAYS'
-                      : _filterTimeSegValue == 1
-                          ? 'LAST 30 DAYS'
-                          : _filterTimeSegValue == 2
-                              ? 'LAST 12 WEEKS'
-                              : _filterTimeSegValue == 3
-                                  ? 'LAST 6 MONTHS'
-                                  : 'LAST 1 YEAR',
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
+                    _filterTimeSegValue == 0
+                        ? 'LAST 7 DAYS'
+                        : _filterTimeSegValue == 1
+                            ? 'LAST 30 DAYS'
+                            : _filterTimeSegValue == 2
+                                ? 'LAST 12 WEEKS'
+                                : _filterTimeSegValue == 3
+                                    ? 'LAST 6 MONTHS'
+                                    : 'LAST 1 YEAR',
+                    style: Theme.of(context).textTheme.titleSmall),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
@@ -192,9 +184,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             '${cashFlowCalc.cashFlowTotalCalc(
                                   transactions,
                                 ).toStringAsFixed(2)} HRK ',
-                            style: const TextStyle(
-                              fontSize: 25,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                           const SizedBox(height: 20),
                           Column(
@@ -239,35 +235,30 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Cash Flow Table',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    )),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  'Do I need any charts?',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  ),
+                                Text(
+                                  'Cash Flow Table',
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
+                                const SizedBox(height: 5),
+                                Text('Do I need any charts?',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Divider(),
                                 ),
                                 Text(
-                                  _filterTimeSegValue == 0
-                                      ? 'LAST 7 DAYS'
-                                      : _filterTimeSegValue == 1
-                                          ? 'LAST 30 DAYS'
-                                          : _filterTimeSegValue == 2
-                                              ? 'LAST 12 WEEKS'
-                                              : _filterTimeSegValue == 3
-                                                  ? 'LAST 6 MONTHS'
-                                                  : 'LAST 1 YEAR',
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
+                                    _filterTimeSegValue == 0
+                                        ? 'LAST 7 DAYS'
+                                        : _filterTimeSegValue == 1
+                                            ? 'LAST 30 DAYS'
+                                            : _filterTimeSegValue == 2
+                                                ? 'LAST 12 WEEKS'
+                                                : _filterTimeSegValue == 3
+                                                    ? 'LAST 6 MONTHS'
+                                                    : 'LAST 1 YEAR',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall),
                                 const SizedBox(height: 20),
                                 Row(
                                   mainAxisAlignment:

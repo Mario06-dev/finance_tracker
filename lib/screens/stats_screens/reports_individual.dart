@@ -36,13 +36,10 @@ class _ReportsIndividualState extends State<ReportsIndividual> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black54,
         elevation: 0,
-        backgroundColor: bgColor,
         title: Text(
           widget.upperCatTitle,
           style: GoogleFonts.prompt(
-            color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),

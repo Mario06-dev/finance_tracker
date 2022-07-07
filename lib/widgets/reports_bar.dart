@@ -21,23 +21,30 @@ class ReportBar extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          color: isHeading ? Colors.grey.withOpacity(0.1) : Colors.white,
+          color: isHeading
+              ? Colors.grey.withOpacity(0.1)
+              : Theme.of(context).scaffoldBackgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               isHeading
                   ? Text(
                       title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.normal,
+                          ),
                     )
                   : Row(
                       children: [
                         CircleAvatar(radius: 5, backgroundColor: color),
                         const SizedBox(width: 10),
-                        Text(title),
+                        Text(
+                          title,
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                        ),
                       ],
                     ),
               Row(
@@ -58,7 +65,6 @@ class ReportBar extends StatelessWidget {
                           onPressed: () {},
                           icon: const Icon(
                             Icons.keyboard_arrow_right,
-                            color: Colors.black54,
                           ))
                       : IconButton(
                           icon: const Icon(Icons.keyboard_arrow_right),

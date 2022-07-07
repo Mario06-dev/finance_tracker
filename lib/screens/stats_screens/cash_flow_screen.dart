@@ -33,7 +33,7 @@ class _CashFlowScreenState extends State<CashFlowScreen> {
       text,
       style: TextStyle(
         fontSize: 12,
-        color: index == _filterTimeSegValue ? Colors.white : Colors.black54,
+        color: index == _filterTimeSegValue ? Colors.white : Colors.grey,
       ),
     );
   }
@@ -45,19 +45,20 @@ class _CashFlowScreenState extends State<CashFlowScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black54,
+        //foregroundColor: Colors.black54,
         elevation: 0,
-        backgroundColor: bgColor,
+        //backgroundColor: bgColor,
         title: Text(
           'Cash Flow',
           style: GoogleFonts.prompt(
-            color: Colors.black,
+            //color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),
         ),
       ),
       body: SlidingUpPanel(
+        color: Theme.of(context).scaffoldBackgroundColor,
         minHeight: 100,
         isDraggable: false,
         panel: Column(
@@ -116,44 +117,36 @@ class _CashFlowScreenState extends State<CashFlowScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Cash Flow',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
+                  Text('Cash Flow',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontSize: 22)),
                   const SizedBox(height: 5),
-                  const Text(
-                    'Am I spending less then I make?',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
+                  Text('Am I spending less then I make?',
+                      style: Theme.of(context).textTheme.titleSmall),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Divider(),
                   ),
                   Text(
-                    _filterTimeSegValue == 0
-                        ? 'LAST 7 DAYS'
-                        : _filterTimeSegValue == 1
-                            ? 'LAST 30 DAYS'
-                            : _filterTimeSegValue == 2
-                                ? 'LAST 12 WEEKS'
-                                : _filterTimeSegValue == 3
-                                    ? 'LAST 6 MONTHS'
-                                    : 'LAST 1 YEAR',
-                    style: const TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
+                      _filterTimeSegValue == 0
+                          ? 'LAST 7 DAYS'
+                          : _filterTimeSegValue == 1
+                              ? 'LAST 30 DAYS'
+                              : _filterTimeSegValue == 2
+                                  ? 'LAST 12 WEEKS'
+                                  : _filterTimeSegValue == 3
+                                      ? 'LAST 6 MONTHS'
+                                      : 'LAST 1 YEAR',
+                      style: Theme.of(context).textTheme.titleSmall),
                   const SizedBox(height: 10),
                   Text(
                     '${calcData.cashFlowTotalCalc(transactions).toStringAsFixed(2)} HRK ',
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   const SizedBox(height: 20),
                   FlowBar(
@@ -209,15 +202,11 @@ class FlowBar extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Text(
-                amount.toStringAsFixed(2) + ' HRK',
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+                '${amount.toStringAsFixed(2)} HRK',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
           ),

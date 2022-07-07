@@ -30,7 +30,7 @@ class _SpendingsScreenState extends State<SpendingsScreen> {
       text,
       style: TextStyle(
         fontSize: 12,
-        color: index == _filterTimeSegValue ? Colors.white : Colors.black54,
+        color: index == _filterTimeSegValue ? Colors.white : Colors.grey,
       ),
     );
   }
@@ -42,19 +42,17 @@ class _SpendingsScreenState extends State<SpendingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black54,
         elevation: 0,
-        backgroundColor: bgColor,
         title: Text(
           'Spendings',
           style: GoogleFonts.prompt(
-            color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 18,
           ),
         ),
       ),
       body: SlidingUpPanel(
+        color: Theme.of(context).scaffoldBackgroundColor,
         minHeight: 100,
         isDraggable: false,
         panel: Column(
@@ -99,18 +97,17 @@ class _SpendingsScreenState extends State<SpendingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Spending',
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 22),
                 ),
                 const SizedBox(height: 5),
-                const Text(
+                Text(
                   'Where does my money go?',
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -126,9 +123,7 @@ class _SpendingsScreenState extends State<SpendingsScreen> {
                               : _filterTimeSegValue == 3
                                   ? 'LAST 6 MONTHS'
                                   : 'LAST 1 YEAR',
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(height: 20),
                 SizedBox(

@@ -37,7 +37,7 @@ ThemeData lightModeTheme() {
       ),
     ),
     primaryColor: const Color(0xff5063EE),
-    shadowColor: Colors.black.withOpacity(0.1),
+    shadowColor: Colors.white,
     hintColor: Colors.black.withOpacity(0.7),
     scaffoldBackgroundColor: Colors.white,
     listTileTheme: const ListTileThemeData(
@@ -89,6 +89,7 @@ ThemeData darkModeTheme() {
       ),
     ),
     primaryColor: const Color(0xff5063EE),
+    splashColor: Colors.white,
     shadowColor: Colors.white.withOpacity(0.1),
     hintColor: Colors.white.withOpacity(0.7),
     scaffoldBackgroundColor: const Color(0xFF121212),

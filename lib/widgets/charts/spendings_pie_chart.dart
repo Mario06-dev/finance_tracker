@@ -35,8 +35,6 @@ class _ExpensesChartState extends State<ExpensesChart> {
 
                 touchedIndex =
                     pieTouchResponse.touchedSection!.touchedSectionIndex;
-
-                print('Index ' + touchedIndex.toString() + ' touched');
               });
             }),
             centerSpaceRadius: 80,
@@ -51,16 +49,15 @@ class _ExpensesChartState extends State<ExpensesChart> {
               Text(
                 spendingsChartCalc.getClickedCategory(
                     widget.transactions, touchedIndex),
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 5),
               Text(
                 '${spendingsChartCalc.getClickedSum(widget.transactions, touchedIndex).toStringAsFixed(2)} kn',
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontSize: 16),
               ),
             ],
           ),
