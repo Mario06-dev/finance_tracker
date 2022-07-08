@@ -1,3 +1,6 @@
+import 'package:finance_tracker/constants/categories.dart';
+import 'package:finance_tracker/providers/user_provider.dart';
+import 'package:finance_tracker/resources/firestore_methods.dart';
 import 'package:finance_tracker/screens/add_transaction_pages/page_5.dart';
 import 'package:finance_tracker/screens/add_transaction_pages/page_6.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
+import '../models/transaction_model.dart';
 import '../providers/add_trans_provider.dart';
 import 'add_transaction_pages/page_1.dart';
 import 'add_transaction_pages/page_2.dart';
@@ -17,8 +21,15 @@ late PageController pageController;
 // ignore: must_be_immutable
 class AddTransScreen extends StatefulWidget {
   int selectedIndex;
+  bool isEdit;
+  String transId;
 
-  AddTransScreen(this.selectedIndex, {Key? key}) : super(key: key);
+  AddTransScreen({
+    Key? key,
+    required this.selectedIndex,
+    this.isEdit = false,
+    this.transId = '',
+  }) : super(key: key);
 
   @override
   State<AddTransScreen> createState() => _AddTransScreenState();
@@ -32,6 +43,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
   @override
   void initState() {
     pageController = PageController(initialPage: widget.selectedIndex);
+
     super.initState();
   }
 
@@ -50,12 +62,37 @@ class _AddTransScreenState extends State<AddTransScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _provider = Provider.of<AddTransProvider>(context);
+    final addTransProvider = Provider.of<AddTransProvider>(context);
+    final user = Provider.of<UserProvider>(context);
 
-    bool isExpense = _provider.getisExpense;
-    double amount = _provider.getAmount;
-    String description = _provider.getDescription;
-    DateTime date = _provider.getDate;
+    bool isExpense = addTransProvider.getisExpense;
+    double amount = addTransProvider.getAmount;
+    String description = addTransProvider.getDescription;
+    DateTime date = addTransProvider.getDate;
+
+    void updateTransaction() {
+      TransactionModel transaction = TransactionModel(
+        transId: widget.transId,
+        uid: user.getUser!.uid,
+        isExpense: addTransProvider.getisExpense,
+        amount: addTransProvider.getAmount,
+        category: categories
+            .where((cat) => cat.title == addTransProvider.getCategory.title)
+            .toList()
+            .first
+            .title,
+        date: addTransProvider.getDate,
+        description: addTransProvider.getDescription,
+      );
+
+      FirestoreMethods().updateTransaction(transaction, user.getUser!.uid);
+      Navigator.of(context).pop();
+    }
+
+    void deleteTransaction() {
+      FirestoreMethods().deleteTransaction(widget.transId);
+      Navigator.of(context).pop();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -69,6 +106,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
             //color: blackTextColor,
           ),
         ),
+
         centerTitle: true,
         elevation: 0,
         //backgroundColor: bgColor,
@@ -80,6 +118,30 @@ class _AddTransScreenState extends State<AddTransScreen> {
             fontSize: 18,
           ),
         ),
+        actions: [
+          !widget.isEdit
+              ? IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.check, color: Colors.greenAccent),
+                )
+              : Container(),
+          widget.isEdit
+              ? IconButton(
+                  onPressed: () {
+                    deleteTransaction();
+                  },
+                  icon: const Icon(Icons.delete, color: Colors.redAccent),
+                )
+              : Container(),
+          widget.isEdit
+              ? IconButton(
+                  onPressed: () {
+                    updateTransaction();
+                  },
+                  icon: const Icon(Icons.update, color: Colors.blueAccent),
+                )
+              : Container(),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 10),
@@ -129,10 +191,10 @@ class _AddTransScreenState extends State<AddTransScreen> {
                           pageController.jumpToPage(2);
                         },
                         child: AddValueFieldLeft(
-                          icon: _provider.getCategory.icon,
+                          icon: addTransProvider.getCategory.icon,
                           isAvatar: true,
                           title: 'Category',
-                          value: _provider.getCategory.title,
+                          value: addTransProvider.getCategory.title,
                         ),
                       ),
                       InkWell(
@@ -180,7 +242,8 @@ class _AddTransScreenState extends State<AddTransScreen> {
                               const Offset(0, 7), // changes position of shadow
                         ),
                       ], */
-                      color: Theme.of(context).shadowColor,
+                      //color: Theme.of(context).shadowColor,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: PageView(

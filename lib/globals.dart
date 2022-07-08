@@ -1,1 +1,1 @@
-String selectedThemeMode = 'Light';
+String selectedThemeMode = 'System';

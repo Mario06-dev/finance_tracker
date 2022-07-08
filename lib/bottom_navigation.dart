@@ -75,11 +75,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
       floatingActionButton: keyboardOpen
           ? FloatingActionButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => AddTransScreen(0)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AddTransScreen(selectedIndex: 0)));
               },
               backgroundColor: primaryColor,
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             )
           : null,
       bottomNavigationBar: BottomAppBar(

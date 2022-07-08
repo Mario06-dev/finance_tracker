@@ -76,16 +76,17 @@ class StatsCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       height: 200,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         //color: Color(0xfff2f5f3),
-        gradient: LinearGradient(
+        color: Theme.of(context).shadowColor,
+        /* gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
             Color(0xfff2f5f3),
             Colors.white,
           ],
-        ),
+        ), */
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

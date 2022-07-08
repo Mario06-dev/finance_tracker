@@ -1,5 +1,7 @@
+import 'package:finance_tracker/constants/categories.dart';
 import 'package:finance_tracker/constants/colors.dart';
 import 'package:finance_tracker/models/user_model.dart';
+import 'package:finance_tracker/providers/add_trans_provider.dart';
 import 'package:finance_tracker/providers/user_provider.dart';
 import 'package:finance_tracker/resources/db_service.dart';
 import 'package:finance_tracker/resources/filtering_methods.dart';
@@ -12,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../models/transaction_model.dart';
+import 'add_trans_screen.dart';
 
 class RecordsScreen extends StatefulWidget {
   const RecordsScreen({Key? key}) : super(key: key);
@@ -66,48 +69,85 @@ class _RecordsScreenState extends State<RecordsScreen> {
     );
   }
 
-  Widget _buildTransaction(TransactionModel transaction, DateTime dateBefore) {
-    // Current transaction date
-    DateTime currentDate = transaction.date;
-
-    // Previous transaction date
-    DateTime previousDate = dateBefore;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        !(currentDate.day == previousDate.day)
-            ? Column(
-                children: [
-                  //const SizedBox(height: 10),
-                  DateDisplay(date: currentDate),
-                ],
-              )
-            : Container(),
-        TransListItem(transaction: transaction),
-      ],
-    );
-  }
-
-  Widget _buildFirstTransactions(TransactionModel transaction) {
-    // Current transaction date
-    DateTime currentDate = transaction.date;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DateDisplay(date: currentDate),
-        TransListItem(transaction: transaction),
-      ],
-    );
-  }
-
   /* ===================== BUILD METHOD  =====================*/
 
   @override
   Widget build(BuildContext context) {
     // Getting current logged in user
     UserModel? user = Provider.of<UserProvider>(context).getUser;
+
+    // Add transaction provider instance
+    AddTransProvider? addTransProvider = Provider.of<AddTransProvider>(context);
+
+    // Editing transaction
+    void transactionTapped(TransactionModel transaction) {
+      // Provider
+      addTransProvider.setAmount(transaction.amount.toString());
+      addTransProvider.setCategory(categories
+          .where((cat) => cat.title == transaction.category)
+          .toList()
+          .first);
+      addTransProvider.setDate(transaction.date);
+      addTransProvider.setDescription(transaction.description);
+      addTransProvider.setisExpense(transaction.isExpense);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AddTransScreen(
+                  selectedIndex: 0,
+                  isEdit: true,
+                  transId: transaction.transId,
+                )),
+      );
+    }
+
+    Widget _buildTransaction(
+        TransactionModel transaction, DateTime dateBefore) {
+      // Current transaction date
+      DateTime currentDate = transaction.date;
+
+      // Previous transaction date
+      DateTime previousDate = dateBefore;
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          !(currentDate.day == previousDate.day)
+              ? Column(
+                  children: [
+                    //const SizedBox(height: 10),
+                    DateDisplay(date: currentDate),
+                  ],
+                )
+              : Container(),
+          InkWell(
+            onTap: () {
+              transactionTapped(transaction);
+            },
+            child: TransListItem(transaction: transaction),
+          ),
+        ],
+      );
+    }
+
+    Widget _buildFirstTransactions(TransactionModel transaction) {
+      // Current transaction date
+      DateTime currentDate = transaction.date;
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DateDisplay(date: currentDate),
+          InkWell(
+            onTap: () {
+              transactionTapped(transaction);
+            },
+            child: TransListItem(transaction: transaction),
+          ),
+        ],
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
