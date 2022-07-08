@@ -20,7 +20,7 @@ class ReportBar extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
           color: isHeading
               ? Colors.grey.withOpacity(0.1)
               : Theme.of(context).scaffoldBackgroundColor,
@@ -76,7 +76,7 @@ class ReportBar extends StatelessWidget {
             ],
           ),
         ),
-        Divider(height: 1, color: Colors.grey[200]),
+        const Divider(height: 1),
       ],
     );
   }

@@ -20,6 +20,7 @@ class TextFieldInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      autofocus: true,
       controller: controller,
       keyboardType: textInputType,
       obscureText: isPass ? true : false,

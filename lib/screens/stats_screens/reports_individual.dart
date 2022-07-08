@@ -1,7 +1,7 @@
 import 'package:finance_tracker/constants/categories.dart';
+import 'package:finance_tracker/screens/individual_records_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../constants/colors.dart';
 import '../../models/category_model.dart';
 import '../../models/transaction_model.dart';
 import '../../resources/stats_calc/categories_calc.dart';
@@ -49,15 +49,27 @@ class _ReportsIndividualState extends State<ReportsIndividual> {
         children: List.generate(
           loadedCats.length,
           (index) {
-            return ReportBar(
-              color: loadedCats[index].color,
-              title: loadedCats[index].title,
-              amount: catCalc.getIndividualCategorySum(
-                  widget.dbTransactions, loadedCats[index].title),
-              isHeading: false,
-              isExpense: loadedCats[index].parentCategoryTitle == 'Income'
-                  ? false
-                  : true,
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => IndividualRecordsScreen(
+                            givenCategory: loadedCats[index].title,
+                            dbTransactions: widget.dbTransactions,
+                          )),
+                );
+              },
+              child: ReportBar(
+                color: loadedCats[index].color,
+                title: loadedCats[index].title,
+                amount: catCalc.getIndividualCategorySum(
+                    widget.dbTransactions, loadedCats[index].title),
+                isHeading: false,
+                isExpense: loadedCats[index].parentCategoryTitle == 'Income'
+                    ? false
+                    : true,
+              ),
             );
           },
         ),
