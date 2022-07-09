@@ -5,6 +5,7 @@ import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/records_screen.dart';
 import 'package:finance_tracker/screens/settings_screen.dart';
 import 'package:finance_tracker/screens/statistics_screen.dart';
+import 'package:finance_tracker/screens/statistics_screen_new.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               children: const [
                 DashboardScreen(),
                 RecordsScreen(),
-                StatisticsScreen(),
+                StatisticsScreenNew(),
                 SettingsScreen(),
               ],
             ),

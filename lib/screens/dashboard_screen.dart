@@ -63,9 +63,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 decoration: BoxDecoration(
                   border: Border(
                     top: BorderSide(
-                        width: 1, color: Theme.of(context).shadowColor),
+                        width: 1, color: Theme.of(context).dividerColor),
                     bottom: BorderSide(
-                        width: 1, color: Theme.of(context).shadowColor),
+                        width: 1, color: Theme.of(context).dividerColor),
                   ),
                 ),
                 child: Row(
@@ -141,7 +141,7 @@ class ColumnItem extends StatelessWidget {
         border: Border(
           //top: BorderSide(width: 1, color: Color(0xffe0dfe7)),
           //bottom: BorderSide(width: 1, color: Color(0xffe0dfe7)),
-          right: BorderSide(width: 1, color: Theme.of(context).shadowColor),
+          right: BorderSide(width: 1, color: Theme.of(context).dividerColor),
         ),
       ),
       padding: const EdgeInsets.all(15),

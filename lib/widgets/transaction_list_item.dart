@@ -24,7 +24,7 @@ class _TransListItemState extends State<TransListItem> {
         children: [
           CircleAvatar(
             //backgroundColor: Colors.grey[100],
-            backgroundColor: Theme.of(context).shadowColor,
+            backgroundColor: Theme.of(context).dividerColor,
             child: Icon(
               categories
                   .where((category) =>

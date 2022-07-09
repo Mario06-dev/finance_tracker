@@ -50,7 +50,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
               title,
               style: TextStyle(
                   fontSize: 14,
-                  color: isExpense ? Colors.red : Theme.of(context).splashColor,
+                  color: isExpense ? Colors.red : Colors.grey,
                   fontWeight: FontWeight.bold),
             ),
           )

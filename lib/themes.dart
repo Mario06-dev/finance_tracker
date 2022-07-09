@@ -7,7 +7,7 @@ ThemeData lightModeTheme() {
   final ThemeData base = ThemeData.light();
 
   return base.copyWith(
-    textTheme: GoogleFonts.rubikTextTheme().copyWith(
+    textTheme: TextTheme(
       titleLarge: const TextStyle(
         color: Colors.black,
         fontSize: 20,
@@ -29,7 +29,7 @@ ThemeData lightModeTheme() {
       labelSmall: const TextStyle(
         color: Colors.black45,
         fontSize: 12,
-        fontWeight: FontWeight.w400,
+        //fontWeight: FontWeight.w400,
       ),
       bodySmall: const TextStyle(
         color: Colors.grey,
@@ -38,6 +38,7 @@ ThemeData lightModeTheme() {
     ),
     primaryColor: const Color(0xff5063EE),
     shadowColor: Colors.white,
+    dividerColor: Colors.grey[100],
     hintColor: Colors.black.withOpacity(0.7),
     scaffoldBackgroundColor: Colors.white,
     listTileTheme: const ListTileThemeData(
@@ -59,7 +60,7 @@ ThemeData darkModeTheme() {
   final ThemeData base = ThemeData.dark();
 
   return base.copyWith(
-    textTheme: GoogleFonts.rubikTextTheme().copyWith(
+    textTheme: TextTheme(
       titleLarge: const TextStyle(
         color: Colors.white,
         fontSize: 20,
