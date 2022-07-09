@@ -346,7 +346,10 @@ class _RecordsScreenState extends State<RecordsScreen> {
                           height: 100,
                         ),
                         const SizedBox(height: 30),
-                        const Text('No transactions yet'),
+                        Text(
+                          'No transactions yet',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
                       ],
                     );
                   }
