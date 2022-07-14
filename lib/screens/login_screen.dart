@@ -1,11 +1,9 @@
 import 'package:finance_tracker/bottom_navigation.dart';
 import 'package:finance_tracker/constants/colors.dart';
-import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/signup_screen.dart';
 import 'package:finance_tracker/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../resources/auth_methods.dart';
 import '../utils/utils.dart';
@@ -110,10 +108,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 60.h),
                 Text(
                   'Login to your account',
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.copyWith(fontSize: 22),
                 ),
                 SizedBox(height: 30.h),
                 TextFieldInput(
