@@ -90,4 +90,17 @@ class FilteringMethods {
     }
     return filteredTransactions;
   }
+
+  /*  FNC: -> FIlterign transactions filter day, time and date range filter*/
+
+  List<TransactionModel> getFilteredTransactions3(
+    List<TransactionModel> givenTransactions,
+    DateTime fromDate,
+    DateTime toDate,
+  ) {
+    // Filtered transactions
+    List<TransactionModel> filteredTransactions = [];
+
+    return filteredTransactions;
+  }
 }
