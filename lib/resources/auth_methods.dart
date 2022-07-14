@@ -36,8 +36,20 @@ class AuthMethods {
       } else {
         res = 'Please enter all the fields';
       }
-    } catch (err) {
-      res = err.toString();
+    } on FirebaseAuthException catch (err) {
+      switch (err.code) {
+        case 'invalid-email':
+          res = 'Entered email is not properly formated.';
+          break;
+        case 'wrong-password':
+          res = 'Entered password is not correct.';
+          break;
+        case 'user-not-found':
+          res = 'User with this email does not exist.';
+          break;
+      }
+
+      res = err.message.toString();
     }
     return res;
   }
@@ -71,8 +83,21 @@ class AuthMethods {
 
         res = 'success';
       }
-    } catch (err) {
-      res = err.toString();
+    } on FirebaseAuthException catch (err) {
+      switch (err.code) {
+        case 'invalid-email':
+          res = 'Entered email is not properly formated.';
+          break;
+        case 'weak-password':
+          res =
+              'Entered password is too weak. Please provide at least 6 characters.';
+          break;
+        case 'email-already-in-use':
+          res = 'Entered email is already in use.';
+          break;
+      }
+
+      res = err.message.toString();
     }
 
     return res;

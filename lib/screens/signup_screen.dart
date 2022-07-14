@@ -3,13 +3,10 @@ import 'package:finance_tracker/screens/login_screen.dart';
 import 'package:finance_tracker/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../bottom_navigation.dart';
 import '../resources/auth_methods.dart';
 import '../utils/utils.dart';
 import '../widgets/small_action_button.dart';
-import 'dashboard_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -116,10 +113,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(height: 60.h),
                 Text(
                   'Sign up to Finance tracker',
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.copyWith(fontSize: 22),
                 ),
                 SizedBox(height: 30.h),
                 TextFieldInput(

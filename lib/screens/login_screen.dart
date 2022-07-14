@@ -110,10 +110,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 60.h),
                 Text(
                   'Login to your account',
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.copyWith(fontSize: 22),
                 ),
                 SizedBox(height: 30.h),
                 TextFieldInput(
