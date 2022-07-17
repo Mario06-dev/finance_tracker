@@ -45,33 +45,36 @@ class _ReportsIndividualState extends State<ReportsIndividual> {
           ),
         ),
       ),
-      body: Column(
-        children: List.generate(
-          loadedCats.length,
-          (index) {
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => IndividualRecordsScreen(
-                            givenCategory: loadedCats[index].title,
-                            dbTransactions: widget.dbTransactions,
-                          )),
-                );
-              },
-              child: ReportBar(
-                color: loadedCats[index].color,
-                title: loadedCats[index].title,
-                amount: catCalc.getIndividualCategorySum(
-                    widget.dbTransactions, loadedCats[index].title),
-                isHeading: false,
-                isExpense: loadedCats[index].parentCategoryTitle == 'Income'
-                    ? false
-                    : true,
-              ),
-            );
-          },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: List.generate(
+            loadedCats.length,
+            (index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => IndividualRecordsScreen(
+                              givenCategory: loadedCats[index].title,
+                              dbTransactions: widget.dbTransactions,
+                            )),
+                  );
+                },
+                child: ReportBar(
+                  color: loadedCats[index].color,
+                  title: loadedCats[index].title,
+                  amount: catCalc.getIndividualCategorySum(
+                      widget.dbTransactions, loadedCats[index].title),
+                  isHeading: false,
+                  isExpense: loadedCats[index].parentCategoryTitle == 'Income'
+                      ? false
+                      : true,
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

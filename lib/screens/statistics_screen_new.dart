@@ -1,3 +1,4 @@
+import 'package:finance_tracker/screens/stats_screens/balance_trend_screen.dart';
 import 'package:finance_tracker/screens/stats_screens/cash_flow_screen.dart';
 import 'package:finance_tracker/screens/stats_screens/reports_screen.dart';
 import 'package:finance_tracker/screens/stats_screens/spendings_screen.dart';
@@ -23,14 +24,23 @@ class StatisticsScreenNew extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CashFlowScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const BalanceTrendScreen()),
               );
             },
             child: const StatsCard(
                 title: 'Balance Trend', image: 'assets/images/statistics.png'),
           ),
-          const StatsCard(
-              title: 'Cash Flow', image: 'assets/images/income.png'),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CashFlowScreen()),
+              );
+            },
+            child: const StatsCard(
+                title: 'Cash Flow', image: 'assets/images/income.png'),
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
