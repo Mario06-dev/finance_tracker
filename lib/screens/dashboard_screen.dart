@@ -80,8 +80,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         titleValue:
                             '${cashFlowCalc.cashFlowTotalCalc(transactions).toStringAsFixed(2)} kn',
                         subtitle: 'past month net balance'),
-                    const ColumnItem(
-                        titleValue: '-', subtitle: ' example to be added'),
+                    ColumnItem(
+                        titleValue:
+                            '${reports.getLargestrTransaction(transactions).toStringAsFixed(2)} kn',
+                        subtitle: 'largest transaction'),
                   ],
                 ),
               ),

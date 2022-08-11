@@ -43,6 +43,11 @@ class _IndividualRecordsScreenState extends State<IndividualRecordsScreen> {
         .where((trans) => trans.category == widget.givenCategory)
         .toList();
 
+    // Sort transactions by date
+    displayTransactions.sort((a, b) {
+      return b.date.compareTo(a.date);
+    });
+
     // Editing transaction
     void transactionTapped(TransactionModel transaction) {
       // Provider

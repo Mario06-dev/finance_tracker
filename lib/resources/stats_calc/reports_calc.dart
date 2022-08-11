@@ -64,6 +64,20 @@ class ReportsCalc {
     return averageADay;
   }
 
+/* -- FUNCTION -- : Returning largest transaction in time period */
+
+  double getLargestrTransaction(List<TransactionModel> loadedTransactions) {
+    double largestTrans = 0.0;
+
+    loadedTransactions.forEach((trans) {
+      if (trans.amount.abs() > largestTrans) {
+        largestTrans = trans.amount;
+      }
+    });
+
+    return largestTrans;
+  }
+
   // FNC -> Returns sum of expenses or income transactions in given transactions list
   double getSumOfTransType(
       List<TransactionModel> loadedTransactions, bool isExpenseWanted) {
