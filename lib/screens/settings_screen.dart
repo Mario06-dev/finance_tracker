@@ -2,6 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:finance_tracker/models/user_model.dart';
 import 'package:finance_tracker/resources/auth_methods.dart';
 import 'package:finance_tracker/screens/login_screen.dart';
+import 'package:finance_tracker/screens/upcoming_features_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 20),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UpcomingScreen()),
+                );
+              },
               child: ListTile(
                 contentPadding: const EdgeInsets.all(0),
                 minLeadingWidth: 10,
