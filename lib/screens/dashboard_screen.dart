@@ -152,7 +152,7 @@ class ColumnItem extends StatelessWidget {
           Text(
             titleValue.toString(),
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 14.sp,
               color: Theme.of(context).primaryColor,
             ),
           ),

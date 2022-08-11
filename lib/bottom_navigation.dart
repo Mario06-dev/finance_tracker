@@ -4,7 +4,6 @@ import 'package:finance_tracker/screens/add_trans_screen.dart';
 import 'package:finance_tracker/screens/dashboard_screen.dart';
 import 'package:finance_tracker/screens/records_screen.dart';
 import 'package:finance_tracker/screens/settings_screen.dart';
-import 'package:finance_tracker/screens/statistics_screen.dart';
 import 'package:finance_tracker/screens/statistics_screen_new.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

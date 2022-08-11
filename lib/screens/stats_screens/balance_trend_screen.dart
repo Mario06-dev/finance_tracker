@@ -45,7 +45,7 @@ class _BalanceTrendScreenState extends State<BalanceTrendScreen> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'Spendings',
+          'Balance Trend',
           style: GoogleFonts.prompt(
             fontWeight: FontWeight.w500,
             fontSize: 18,

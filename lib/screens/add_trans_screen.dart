@@ -122,7 +122,7 @@ class _AddTransScreenState extends State<AddTransScreen> {
           !widget.isEdit
               ? IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.check, color: Colors.greenAccent),
+                  icon: const Icon(Icons.check, color: Colors.white),
                 )
               : Container(),
           widget.isEdit
