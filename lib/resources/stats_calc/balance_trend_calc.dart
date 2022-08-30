@@ -33,6 +33,7 @@ class BalanceTrendCalc {
           if ((transactions[i].date.month == transactions[i - 1].date.month) &&
               (transactions[i].date.day == transactions[i - 1].date.day)) {
             netSumDay = transactions[i].amount + transactions[i - 1].amount;
+            print(netSumDay);
             chartData
                 .add(BalanceTrendData(netSumDay, transactions[i - 1].date));
             chartData[chartData.indexWhere((data) =>
@@ -45,15 +46,7 @@ class BalanceTrendCalc {
         }
       }
 
-      // TESTING
-
-      print('Net sum for ${transactions[i].date} -> $netSumDay');
-
       netSumDay = 0;
-    }
-
-    for (var element in chartData) {
-      print('${element.date} -> ${element.amount}');
     }
 
     return chartData;

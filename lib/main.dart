@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
 import 'bottom_navigation.dart';
 
 void main() async {
@@ -60,9 +59,10 @@ class _MyAppState extends State<MyApp> {
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
-                        child: CircularProgressIndicator(
-                      color: primaryColor,
-                    ));
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
+                    );
                   }
 
                   return const LoginScreen();
