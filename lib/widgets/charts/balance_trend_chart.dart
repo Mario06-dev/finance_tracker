@@ -18,7 +18,7 @@ class BalanceTrendChart extends StatefulWidget {
 class _BalanceTrendChartState extends State<BalanceTrendChart> {
   @override
   Widget build(BuildContext context) {
-    /* final List<SalesData> chartData = [
+    /* final List<SalesData> chartDataTest = [
       SalesData(widget.transactions[0].date, widget.transactions[0].amount),
       SalesData(widget.transactions[1].date, widget.transactions[1].amount),
       SalesData(widget.transactions[2].date, widget.transactions[2].amount),
@@ -26,8 +26,18 @@ class _BalanceTrendChartState extends State<BalanceTrendChart> {
       SalesData(widget.transactions[4].date, widget.transactions[4].amount),
     ]; */
 
-    final List<BalanceTrendData> chartData =
-        BalanceTrendCalc().getChartData(widget.transactions, widget.timeFilter);
+    /* final List<BalanceTrendData> chartData =
+        BalanceTrendCalc().getChartData(widget.transactions, widget.timeFilter); */
+
+    final List<BalanceTrendData> chartData = [
+      BalanceTrendData(100, DateTime.now()),
+      BalanceTrendData(500, DateTime.utc(2022, 9, 2)),
+      BalanceTrendData(1567, DateTime.utc(2022, 9, 1)),
+      BalanceTrendData(300, DateTime.utc(2022, 8, 31)),
+      BalanceTrendData(110.45, DateTime.utc(2022, 8, 30)),
+      BalanceTrendData(-400, DateTime.utc(2022, 8, 29)),
+      BalanceTrendData(-150, DateTime.utc(2022, 8, 28)),
+    ];
 
     return Scaffold(
       body: Center(

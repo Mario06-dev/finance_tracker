@@ -7,6 +7,7 @@ import 'package:finance_tracker/widgets/dashboard_cards/expenses_card.dart';
 import 'package:finance_tracker/widgets/dashboard_cards/last_records_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../models/transaction_model.dart';
@@ -57,71 +58,91 @@ class _DashboardScreenState extends State<DashboardScreen> {
             0,
           );
 
-          return Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        width: 1, color: Theme.of(context).dividerColor),
-                    bottom: BorderSide(
-                        width: 1, color: Theme.of(context).dividerColor),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return transactions.length > 5
+              ? Column(
                   children: [
-                    ColumnItem(
-                        titleValue:
-                            reports.transactionCount(transactions, true) +
-                                reports.transactionCount(transactions, false),
-                        subtitle: 'transactions past month'),
-                    ColumnItem(
-                        titleValue:
-                            '${cashFlowCalc.cashFlowTotalCalc(transactions).toStringAsFixed(2)} kn',
-                        subtitle: 'past month net balance'),
-                    ColumnItem(
-                        titleValue:
-                            '${reports.getLargestrTransaction(transactions).toStringAsFixed(2)} kn',
-                        subtitle: 'largest transaction'),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                              width: 1, color: Theme.of(context).dividerColor),
+                          bottom: BorderSide(
+                              width: 1, color: Theme.of(context).dividerColor),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ColumnItem(
+                              titleValue: reports.transactionCount(
+                                      transactions, true) +
+                                  reports.transactionCount(transactions, false),
+                              subtitle: 'transactions past month'),
+                          ColumnItem(
+                              titleValue:
+                                  '${cashFlowCalc.cashFlowTotalCalc(transactions).toStringAsFixed(2)} kn',
+                              subtitle: 'past month net balance'),
+                          ColumnItem(
+                              titleValue:
+                                  '${reports.getLargestrTransaction(transactions).toStringAsFixed(2)} kn',
+                              subtitle: 'largest transaction'),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SpendingsScreen()),
+                        );
+                      },
+                      child: TopExpensesCard(transactions),
+                    ),
+                    const SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SpendingsScreen()),
+                        );
+                      },
+                      child: LastRecordsCard(),
+                    ),
+                    const SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SpendingsScreen()),
+                        );
+                      },
+                      child: ExpensesCard(transactions),
+                    ),
                   ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SpendingsScreen()),
-                  );
-                },
-                child: TopExpensesCard(transactions),
-              ),
-              const SizedBox(height: 20),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SpendingsScreen()),
-                  );
-                },
-                child: LastRecordsCard(),
-              ),
-              const SizedBox(height: 20),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SpendingsScreen()),
-                  );
-                },
-                child: ExpensesCard(transactions),
-              ),
-            ],
-          );
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 40),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: 200,
+                        child: SvgPicture.asset('assets/images/blank2.svg'),
+                      ),
+                      const SizedBox(height: 40),
+                      Text(
+                        'To start seeing statistics data please add more transactions.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
+                  ),
+                );
         },
       )),
     );
